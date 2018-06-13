@@ -8,8 +8,8 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.xp.wanandroid"
-        minSdkVersion 15
-        targetSdkVersion 27
+        minSdkVersion 19
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -24,10 +24,32 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "com.android.support:appcompat-v7:$support_version"
+    implementation "com.android.support:design:$support_version"
+    implementation "com.android.support:cardview-v7:$support_version"
+    implementation "com.android.support:support-v4:$support_version"
+    implementation "com.android.support:support-vector-drawable:$support_version"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.1'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit2_converter_gson_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_logging_version"
+    implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:$brvah_version"
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    implementation "com.just.agentweb:agentweb:$agentweb_version"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary_version"
+    implementation "com.gyf.barlibrary:barlibrary:$barlibrary_version"
+    implementation "com.hyman:flowlayout-lib:$flowlayout_version"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:$retrofit2_converter_kotlin_coroutines_version"
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
 }

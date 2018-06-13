@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/main_nav_item_like"
+        android:icon="@drawable/ic_action_my_like"
+        android:title="@string/main_nav_menu_like" />
+
+    <item
+        android:id="@+id/main_nav_item_about"
+        android:icon="@drawable/ic_action_about"
+        android:title="@string/main_nav_menu_about" />
+
+</menu>

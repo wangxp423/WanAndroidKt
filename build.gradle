@@ -25,3 +25,22 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    retrofit2_version = "2.1.0"
+    retrofit2_converter_gson_version = "2.1.0"
+    retrofit2_converter_kotlin_coroutines_version = "1.0.0"
+    okhttp3_logging_version = "3.6.0"
+    support_version = "26.1.0"
+    kotlin_coroutines_version = "0.20"
+    constraint_version = "1.0.2"
+    junit_version = "4.12"
+    test_runner_version = "1.0.1"
+    test_espresso_version = "3.0.1"
+    brvah_version = "2.9.34"
+    glide_version = "3.7.0"
+    agentweb_version = "3.0.0"
+    barlibrary_version = "2.3.0"
+    flowlayout_version = "1.1.2"
+    leakcanary_version = "1.5.4"
+}
