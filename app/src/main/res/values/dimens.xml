@@ -3,4 +3,7 @@
     <dimen name="main_nav_header_height">176dp</dimen>
     <dimen name="main_activity_horizontal_margin">15dp</dimen>
     <dimen name="main_activity_vertical_margin">15dp</dimen>
+    <dimen name="margin_left_normal">15dp</dimen>
+    <dimen name="margin_right_normal">15dp</dimen>
+    <dimen name="margin_top_normal">20dp</dimen>
 </resources>

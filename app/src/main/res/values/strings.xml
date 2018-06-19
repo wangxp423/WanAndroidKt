@@ -16,4 +16,15 @@
 
 
     <string name="login_tip_login_first">请先登录...</string>
+    <string name="login_hint_username">用户名</string>
+    <string name="login_hint_password">密码</string>
+    <string name="login_btn_register">注册</string>
+    <string name="login_btn_login">登录</string>
+    <string name="login_password_not_empty">密码不能为空</string>
+    <string name="login_password_length_short">密码长度不能小于6位</string>
+    <string name="login_username_not_empty">用户名不能为空</string>
+    <string name="login_toast_login_success">登录成功</string>
+    <string name="login_toast_login_fail">登录失败</string>
+    <string name="login_toast_register_success">注册成功</string>
+    <string name="login_toast_register_fial">注册失败</string>
 </resources>

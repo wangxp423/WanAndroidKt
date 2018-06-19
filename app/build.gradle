@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 26
     defaultConfig {
         applicationId "com.xp.wanandroid"
         minSdkVersion 19
@@ -37,6 +37,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
     implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit2_converter_gson_version"
+    implementation "com.squareup.retrofit2:converter-scalars:$retrofit2_converter_gson_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_logging_version"
     implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:$brvah_version"
     implementation "com.github.bumptech.glide:glide:$glide_version"

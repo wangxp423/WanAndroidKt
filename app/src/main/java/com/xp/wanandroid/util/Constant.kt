@@ -9,8 +9,12 @@ package com.xp.wanandroid.util
  * @修改备注：
  */
 object Constant {
+    const val INTERCEPTOR_ENABLE = false
+    const val REQUEST_BASE_URL = "http://wanandroid.com/"
     const val SHARED_NAME = "_preferences"
     const val KEY_LOGIN = "login"
     const val KEY_USERNAME = "useranme"
     const val KEY_PASSWORD = "password"
+    const val REQUEST_NULL = "request fail : null"
+    const val CONTENT_TITLE_KEY = "title"
 }

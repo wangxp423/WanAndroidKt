@@ -1,5 +1,6 @@
 package com.xp.wanandroid.main
 
+import android.app.Activity
 import android.content.Intent
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
@@ -240,14 +241,14 @@ class MainActivity : BaseImmersionBarActivity() {
                     ToastUtil.showShort(this, R.string.login_tip_login_first)
                     return true
                 }
-                Intent(this, LoginActivity::class.java).run {
-                    startActivityForResult(this, MAIN_LOGIN_REQUEST_CODE)
-                }
+//                Intent(this, LoginActivity::class.java).run {
+//                    startActivityForResult(this, MAIN_LOGIN_REQUEST_CODE)
+//                }
             }
             R.id.main_nav_item_about -> {
-                Intent(this, LoginActivity::class.java).run {
-                    startActivityForResult(this, MAIN_LOGIN_REQUEST_CODE)
-                }
+//                Intent(this, LoginActivity::class.java).run {
+//                    startActivityForResult(this, MAIN_LOGIN_REQUEST_CODE)
+//                }
             }
 
         }
@@ -259,7 +260,11 @@ class MainActivity : BaseImmersionBarActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             MAIN_LOGIN_REQUEST_CODE -> {
-
+                if (resultCode == Activity.RESULT_OK) {
+                    tvUserName.text = username
+                    tvLogout.text = getString(R.string.main_nav_header_logout)
+                }
+//                homeFragment?.refreshData()
             }
             MAIN_LIKE_REQUEST_CODE -> {
 

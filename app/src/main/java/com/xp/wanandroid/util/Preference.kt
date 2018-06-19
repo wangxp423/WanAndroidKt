@@ -28,7 +28,7 @@ class Preference<T>(private val key: String, private val default: T) : ReadWrite
     }
 
     override fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
-
+        return putSharePreference(key, value)
     }
 
     @Suppress("UNCHECKED_CAST")
