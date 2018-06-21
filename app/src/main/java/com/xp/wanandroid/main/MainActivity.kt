@@ -12,6 +12,7 @@ import android.view.MenuItem
 import android.widget.TextView
 import com.xp.wanandroid.R
 import com.xp.wanandroid.base.BaseImmersionBarActivity
+import com.xp.wanandroid.blog.MyLikeActivity
 import com.xp.wanandroid.login.LoginActivity
 import com.xp.wanandroid.main.fragment.HomeFragment
 import com.xp.wanandroid.main.fragment.LabelFragment
@@ -241,14 +242,14 @@ class MainActivity : BaseImmersionBarActivity() {
                     ToastUtil.showShort(this, R.string.login_tip_login_first)
                     return true
                 }
-//                Intent(this, LoginActivity::class.java).run {
-//                    startActivityForResult(this, MAIN_LOGIN_REQUEST_CODE)
-//                }
+                Intent(this, MyLikeActivity::class.java).run {
+                    startActivityForResult(this, MAIN_LIKE_REQUEST_CODE)
+                }
             }
             R.id.main_nav_item_about -> {
-//                Intent(this, LoginActivity::class.java).run {
-//                    startActivityForResult(this, MAIN_LOGIN_REQUEST_CODE)
-//                }
+                Intent(this, AboutUsActivity::class.java).run {
+                    startActivity(this)
+                }
             }
 
         }

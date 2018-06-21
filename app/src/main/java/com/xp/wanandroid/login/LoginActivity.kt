@@ -8,6 +8,8 @@ import com.gyf.barlibrary.ImmersionBar
 import com.xp.wanandroid.R
 import com.xp.wanandroid.base.BaseImmersionBarActivity
 import com.xp.wanandroid.login.entity.UserEntity
+import com.xp.wanandroid.login.mvp.LoginContract
+import com.xp.wanandroid.login.mvp.LoginPresenter
 import com.xp.wanandroid.util.Constant
 import com.xp.wanandroid.util.Preference
 import com.xp.wanandroid.util.ToastUtil

@@ -1,8 +1,7 @@
+import com.xp.wanandroid.blog.entity.BlogEntity
 import com.xp.wanandroid.login.entity.UserEntity
 import kotlinx.coroutines.experimental.Deferred
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 /**
  * Retrofit请求api
@@ -59,12 +58,12 @@ interface RetrofitService {
      * @param page page
      * @param k POST search key
      */
-//    @POST("/article/query/{page}/json")
-//    @FormUrlEncoded
-//    fun getSearchList(
-//            @Path("page") page: Int,
-//            @Field("k") k: String
-//    ): Deferred<HomeListResponse>
+    @POST("/article/query/{page}/json")
+    @FormUrlEncoded
+    fun getSearchList(
+            @Path("page") page: Int,
+            @Field("k") k: String
+    ): Deferred<BlogEntity>
 
     /**
      * 登录
@@ -99,20 +98,20 @@ interface RetrofitService {
      * @param page page
      * @return Deferred<HomeListResponse>
      */
-//    @GET("/lg/collect/list/{page}/json")
-//    fun getLikeList(
-//            @Path("page") page: Int
-//    ): Deferred<HomeListResponse>
+    @GET("/lg/collect/list/{page}/json")
+    fun getLikeList(
+            @Path("page") page: Int
+    ): Deferred<BlogEntity>
 
     /**
      * 收藏文章
      * @param id id
      * @return Deferred<HomeListResponse>
      */
-//    @POST("/lg/collect/{id}/json")
-//    fun addCollectArticle(
-//            @Path("id") id: Int
-//    ): Deferred<HomeListResponse>
+    @POST("/lg/collect/{id}/json")
+    fun addCollectArticle(
+            @Path("id") id: Int
+    ): Deferred<BlogEntity>
 
     /**
      * 收藏站外文章
@@ -121,13 +120,13 @@ interface RetrofitService {
      * @param link link
      * @return Deferred<HomeListResponse>
      */
-//    @POST("/lg/collect/add/json")
-//    @FormUrlEncoded
-//    fun addCollectOutsideArticle(
-//            @Field("title") title: String,
-//            @Field("author") author: String,
-//            @Field("link") link: String
-//    ): Deferred<HomeListResponse>
+    @POST("/lg/collect/add/json")
+    @FormUrlEncoded
+    fun addCollectOutsideArticle(
+            @Field("title") title: String,
+            @Field("author") author: String,
+            @Field("link") link: String
+    ): Deferred<BlogEntity>
 
     /**
      * 删除收藏文章
@@ -135,12 +134,12 @@ interface RetrofitService {
      * @param originId -1
      * @return Deferred<HomeListResponse>
      */
-//    @POST("/lg/uncollect/{id}/json")
-//    @FormUrlEncoded
-//    fun removeCollectArticle(
-//            @Path("id") id: Int,
-//            @Field("originId") originId: Int = -1
-//    ): Deferred<HomeListResponse>
+    @POST("/lg/uncollect/{id}/json")
+    @FormUrlEncoded
+    fun removeCollectArticle(
+            @Path("id") id: Int,
+            @Field("originId") originId: Int = -1
+    ): Deferred<BlogEntity>
 
     /**
      * 首页Banner

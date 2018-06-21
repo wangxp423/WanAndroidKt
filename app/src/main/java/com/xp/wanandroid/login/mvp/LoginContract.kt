@@ -1,4 +1,4 @@
-package com.xp.wanandroid.login
+package com.xp.wanandroid.login.mvp
 
 import com.xp.wanandroid.listener.RequestBackListener
 import com.xp.wanandroid.login.entity.UserEntity

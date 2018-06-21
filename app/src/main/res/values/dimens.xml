@@ -6,4 +6,5 @@
     <dimen name="margin_left_normal">15dp</dimen>
     <dimen name="margin_right_normal">15dp</dimen>
     <dimen name="margin_top_normal">20dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>
