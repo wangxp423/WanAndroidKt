@@ -53,6 +53,22 @@ class BlogPresenter(val blogView: BlogContract.BlogView) : BlogContract.IBlogPre
     }
 
     override fun loadMoreDataListByKey(page: Int, key: String) {
+        blogModel.getDataListByKey(page, key, object : RequestBackListener<BlogEntity> {
+            override fun onRequestSuccess(data: BlogEntity) {
+                LogUtil.d("Test", "loadMoreDataListSuccess = " + data)
+                if (data.errorCode == 0) {
+                    blogView.loadMoreDataListSuccess(data)
+                } else {
+                    blogView.loadMoreDataListFail(data.errorMsg)
+                }
+            }
+
+            override fun onRequestFail(errorMsg: String?) {
+                LogUtil.d("Test", "loadMoreDataListFail = " + errorMsg)
+                blogView.loadMoreDataListFail(errorMsg)
+            }
+
+        })
     }
 
     override fun loadMoreDataList(page: Int) {
@@ -81,6 +97,7 @@ class BlogPresenter(val blogView: BlogContract.BlogView) : BlogContract.IBlogPre
     }
 
     override fun cancleRequest() {
+        blogModel.cancelRequest()
     }
 
 }

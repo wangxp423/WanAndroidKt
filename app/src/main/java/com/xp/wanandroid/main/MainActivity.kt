@@ -12,6 +12,7 @@ import android.view.MenuItem
 import android.widget.TextView
 import com.xp.wanandroid.R
 import com.xp.wanandroid.base.BaseImmersionBarActivity
+import com.xp.wanandroid.blog.BlogSearchActivity
 import com.xp.wanandroid.blog.MyLikeActivity
 import com.xp.wanandroid.login.LoginActivity
 import com.xp.wanandroid.main.fragment.HomeFragment
@@ -60,9 +61,9 @@ class MainActivity : BaseImmersionBarActivity() {
         }
         main_activity_main_bottomnav.run {
             setOnNavigationItemSelectedListener {
-                selectedItemId = R.id.main_bottom_nav_item_home
                 bottomNavItemSelected(it.itemId)
             }
+            selectedItemId = R.id.main_bottom_nav_item_home
         }
         main_activity_main_dl.run {
             val toggle = ActionBarDrawerToggle(this@MainActivity, this, main_activity_main_toolbar, R.string.navigation_drawer_open,
@@ -128,7 +129,9 @@ class MainActivity : BaseImmersionBarActivity() {
                 LogUtil.d("Test", "点击热门")
             }
             R.id.main_toolbar_menu_item_search -> {
-                LogUtil.d("Test", "点击搜索")
+                Intent(this, BlogSearchActivity::class.java).run {
+                    startActivity(this)
+                }
             }
         }
         return super.onOptionsItemSelected(item)

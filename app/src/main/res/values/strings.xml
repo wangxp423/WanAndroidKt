@@ -52,4 +52,7 @@
     <string name="login_toast_login_fail">登录失败</string>
     <string name="login_toast_register_success">注册成功</string>
     <string name="login_toast_register_fial">注册失败</string>
+
+
+    <string name="blog_title_search">搜索</string>
 </resources>

@@ -79,4 +79,11 @@ class BlogModel : BlogContract.IBlogModel {
             }
         }
     }
+
+    override fun cancelRequest() {
+        searchListAsync?.cancelByActive()
+        likeListAsync?.cancelByActive()
+        articleCollectAsync?.cancelByActive()
+
+    }
 }

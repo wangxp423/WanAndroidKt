@@ -1,6 +1,8 @@
 package com.xp.wanandroid.blog
 
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.SearchView
+import android.view.Menu
 import android.view.MenuItem
 import com.xp.wanandroid.R
 import com.xp.wanandroid.base.BaseImmersionBarActivity
@@ -15,19 +17,20 @@ import kotlinx.android.synthetic.main.blog_activity_like.*
 import kotlinx.android.synthetic.main.blog_include_swipe_recycle.*
 
 /**
- * @类描述：我关注的人
+ * @类描述：搜索页
  * @创建人：Wangxiaopan
- * @创建时间：2018/6/20 0020 11:16
+ * @创建时间：2018/6/22 0022 15:44
  * @修改人：
- * @修改时间：2018/6/20 0020 11:16
+ * @修改时间：2018/6/22 0022 15:44
  * @修改备注：
  */
-class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
-
+class BlogSearchActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
     private val datas = mutableListOf<Datas>()
     private val blogPresenter: BlogContract.IBlogPresenter by lazy { BlogPresenter(this) }
     private val blogAdapter: BlogListAdapter by lazy { BlogListAdapter(this, datas) }
     private var pageIndex = 0
+    private var searchKey: String? = null
+    private var searchView: SearchView? = null
 
     override fun setLayoutId(): Int = R.layout.blog_activity_like
 
@@ -38,28 +41,32 @@ class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
 
     override fun initView() {
         main_collect_toolbar.run {
-            title = getString(R.string.main_nav_menu_like)
+            title = ""
             setSupportActionBar(this)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
         blog_include_srl.run {
             setOnRefreshListener {
-                isRefreshing = true
-                blogAdapter.setEnableLoadMore(false)
-                pageIndex = 0
-                blogPresenter.getDataList(pageIndex)
+                searchKey?.let {
+                    isRefreshing = true
+                    blogAdapter.setEnableLoadMore(false)
+                    pageIndex = 0
+                    blogPresenter.getDataListByKey(pageIndex, it)
+                }
             }
         }
         blog_include_rv.run {
-            layoutManager = LinearLayoutManager(this@MyLikeActivity)
+            layoutManager = LinearLayoutManager(this@BlogSearchActivity)
             adapter = blogAdapter
         }
         blogAdapter.run {
-            isMyLike = true
+            isMyLike = false
             bindToRecyclerView(blog_include_rv)
             setOnLoadMoreListener({
-                pageIndex++
-                blogPresenter.loadMoreDataList(pageIndex)
+                searchKey?.let {
+                    pageIndex++
+                    blogPresenter.loadMoreDataListByKey(pageIndex, it)
+                }
             }, blog_include_rv)
             setEmptyView(R.layout.recycle_list_empty)
             onItemClickListener = this
@@ -68,14 +75,14 @@ class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
     }
 
     override fun initData() {
-        blogPresenter.getDataList(pageIndex)
     }
 
     override fun cancelRequest() {
+        blogPresenter.cancleRequest()
     }
 
     override fun getDataListSuccess(result: BlogEntity?) {
-        LogUtil.d("Test", "获取数据  = " + result)
+        LogUtil.d("Test", "获取数据 = " + result)
         result?.data?.datas?.let {
             blogAdapter.run {
                 if (data.size > 0) {
@@ -125,17 +132,65 @@ class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
     override fun hideLoading() {
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.blog_search_menu, menu)
+        searchView = menu?.findItem(R.id.blog_search_memu_item_search)?.actionView as SearchView
+        searchView?.init(1920, false, onQueryTextListener = onQueryTextListener)
+        searchKey?.let {
+            searchView?.setQuery(it, true)
+        }
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == android.R.id.home) {
+            searchView?.clearFocus()
             finish()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun SearchView.init(
+            sMaxWidth: Int = 0,
+            sIconified: Boolean = false,
+            isClose: Boolean = false,
+            onQueryTextListener: SearchView.OnQueryTextListener
+    ) = this.run {
+        if (sMaxWidth != 0) {
+            maxWidth = sMaxWidth
+        }
+        // false open
+        isIconified = sIconified
+        // not close
+        if (!isClose) {
+            // open
+            onActionViewExpanded()
+        }
+        // search listener
+        setOnQueryTextListener(onQueryTextListener)
+    }
+
+    private val onQueryTextListener = object : SearchView.OnQueryTextListener {
+        override fun onQueryTextSubmit(query: String?): Boolean {
+            query?.let {
+                searchKey = it
+                blog_include_srl.isRefreshing = true
+                blogAdapter.setEnableLoadMore(false)
+                blogPresenter.getDataListByKey(pageIndex, it)
+            } ?: let {
+                blog_include_srl.isRefreshing = false
+                ToastUtil.showShort(this@BlogSearchActivity, R.string.main_collect_list_no_data)
+            }
+            searchView?.clearFocus()
+            return false
+        }
+
+        override fun onQueryTextChange(newText: String?): Boolean = false
     }
 
     override fun onDestroy() {
         super.onDestroy()
         blogAdapter.onDestory()
     }
-
 
 }

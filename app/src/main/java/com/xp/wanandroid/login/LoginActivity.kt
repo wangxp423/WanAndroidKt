@@ -106,7 +106,7 @@ class LoginActivity : BaseImmersionBarActivity(), View.OnClickListener, LoginCon
         username = entity.data.username
         password = entity.data.password
         setResult(Activity.RESULT_OK,
-                Intent().apply { putExtra(Constant.CONTENT_TITLE_KEY, entity.data.username) })
+                Intent().apply { putExtra(Constant.BLOG_EXTRA_TITLE, entity.data.username) })
         finish()
     }
 

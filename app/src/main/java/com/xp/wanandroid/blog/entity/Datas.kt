@@ -4,20 +4,21 @@ package com.xp.wanandroid.blog.entity
  * 收藏信息类
  */
 data class Datas(
-        var id: Int,
-        var originId: Int,
-        var title: String,
+        var author: String,
         var chapterId: Int,
         var chapterName: String?,
-        var envelopePic: Any,
-        var link: String,
-        var author: String,
-        var origin: Any,
-        var publishTime: Long,
-        var zan: Any,
-        var desc: Any,
-        var visible: Int,
-        var niceDate: String,
         var courseId: Int,
+        var desc: Any,
+        var envelopePic: Any,
+        var id: Int,
+        var link: String,
+        var niceDate: String,
+        var origin: Any,
+        var originId: Int,
+        var publishTime: Long,
+        var title: String,
+        var userId: Int,
+        var visible: Int,
+        var zan: Any,
         var collect: Boolean
 )

@@ -63,7 +63,7 @@ object RetrofitHelper {
                 it.proceed(builder.build())
             }
             // add log print
-            if (Constant.INTERCEPTOR_ENABLE) {
+            if (Constant.INTERCEPTOR_REQUEST_LOG_ENABLE) {
                 // loggingInterceptor
                 addInterceptor(HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
                     LogUtil.d(TAG, CONTENT_PRE + it)

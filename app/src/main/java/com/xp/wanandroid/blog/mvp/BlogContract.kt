@@ -37,5 +37,6 @@ interface BlogContract {
         fun getDataListByKey(page: Int, key: String, listener: RequestBackListener<BlogEntity>)
         fun getDataList(page: Int, listener: RequestBackListener<BlogEntity>)
         fun articleData(id: Int, isAdd: Boolean, listener: RequestBackListener<BlogEntity>)
+        fun cancelRequest()
     }
 }
