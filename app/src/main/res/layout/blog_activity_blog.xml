@@ -26,7 +26,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
-        android:id="@+id/blog_activity_blog_toolbar_webcontent"
+        android:id="@+id/blog_activity_blog_webcontent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />

@@ -12,7 +12,6 @@ import com.xp.wanandroid.base.BaseFragment
  */
 class TypeFragment : BaseFragment() {
     override fun cancelRequest() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }

@@ -91,9 +91,75 @@ class BlogPresenter(val blogView: BlogContract.BlogView) : BlogContract.IBlogPre
     }
 
     override fun articleData(id: Int) {
+        blogModel.articleData(id, true, object : RequestBackListener<BlogEntity> {
+            override fun onRequestSuccess(data: BlogEntity) {
+                LogUtil.d("Test", "articleDataSuccess = " + data)
+                if (data.errorCode == 0) {
+                    blogView.articleDataSuccess(data)
+                } else {
+                    blogView.articleDataFail(data.errorMsg)
+                }
+            }
+
+            override fun onRequestFail(errorMsg: String?) {
+                LogUtil.d("Test", "articleDataFail = " + errorMsg)
+                blogView.articleDataFail(errorMsg)
+            }
+        })
     }
 
     override fun unArticleData(id: Int) {
+        blogModel.articleData(id, false, object : RequestBackListener<BlogEntity> {
+            override fun onRequestSuccess(data: BlogEntity) {
+                LogUtil.d("Test", "unArticleDataSuccess = " + data)
+                if (data.errorCode == 0) {
+                    blogView.unArticleDataSuccess(data)
+                } else {
+                    blogView.unArticleDataFail(data.errorMsg)
+                }
+            }
+
+            override fun onRequestFail(errorMsg: String?) {
+                LogUtil.d("Test", "unArticleDataFail = " + errorMsg)
+                blogView.unArticleDataFail(errorMsg)
+            }
+        })
+    }
+
+    override fun collectOutSideArticleData(title: String, author: String, link: String) {
+        blogModel.collectOutSideArticleData(title, author, link, true, object : RequestBackListener<BlogEntity> {
+            override fun onRequestSuccess(data: BlogEntity) {
+                LogUtil.d("Test", "collectOutSideArticleDataSuccess = " + data)
+                if (data.errorCode == 0) {
+                    blogView.articleDataSuccess(data)
+                } else {
+                    blogView.articleDataFail(data.errorMsg)
+                }
+            }
+
+            override fun onRequestFail(errorMsg: String?) {
+                LogUtil.d("Test", "collectOutSideArticleDataFail = " + errorMsg)
+                blogView.articleDataFail(errorMsg)
+            }
+        })
+    }
+
+    override fun unCollectOutSideArticleData(title: String, author: String, link: String) {
+        blogModel.collectOutSideArticleData(title, author, link, false, object : RequestBackListener<BlogEntity> {
+            override fun onRequestSuccess(data: BlogEntity) {
+                LogUtil.d("Test", "unCollectOutSideArticleDataSuccess = " + data)
+                if (data.errorCode == 0) {
+                    blogView.unArticleDataSuccess(data)
+                } else {
+                    blogView.unArticleDataFail(data.errorMsg)
+                }
+            }
+
+            override fun onRequestFail(errorMsg: String?) {
+                LogUtil.d("Test", "unCollectOutSideArticleDataFail = " + errorMsg)
+                blogView.unArticleDataFail(errorMsg)
+            }
+        })
     }
 
     override fun cancleRequest() {

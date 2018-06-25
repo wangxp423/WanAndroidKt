@@ -21,6 +21,10 @@ interface BlogContract {
         fun getDataListFail(errorMsg: String?)
         fun loadMoreDataListSuccess(result: BlogEntity?)
         fun loadMoreDataListFail(errorMsg: String?)
+        fun articleDataSuccess(result: BlogEntity?)
+        fun articleDataFail(errorMsg: String?)
+        fun unArticleDataSuccess(result: BlogEntity?)
+        fun unArticleDataFail(errorMsg: String?)
     }
 
     interface IBlogPresenter : IBasePresenter {
@@ -30,6 +34,8 @@ interface BlogContract {
         fun loadMoreDataList(page: Int)
         fun articleData(id: Int)
         fun unArticleData(id: Int)
+        fun collectOutSideArticleData(title: String, author: String, link: String)
+        fun unCollectOutSideArticleData(title: String, author: String, link: String)
         fun cancleRequest()
     }
 
@@ -37,6 +43,7 @@ interface BlogContract {
         fun getDataListByKey(page: Int, key: String, listener: RequestBackListener<BlogEntity>)
         fun getDataList(page: Int, listener: RequestBackListener<BlogEntity>)
         fun articleData(id: Int, isAdd: Boolean, listener: RequestBackListener<BlogEntity>)
+        fun collectOutSideArticleData(title: String, author: String, link: String, isAdd: Boolean, listener: RequestBackListener<BlogEntity>)
         fun cancelRequest()
     }
 }

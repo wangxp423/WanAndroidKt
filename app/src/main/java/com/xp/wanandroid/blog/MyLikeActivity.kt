@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.blog_include_swipe_recycle.*
  * @修改备注：
  */
 class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
-
     private val datas = mutableListOf<Datas>()
     private val blogPresenter: BlogContract.IBlogPresenter by lazy { BlogPresenter(this) }
     private val blogAdapter: BlogListAdapter by lazy { BlogListAdapter(this, datas) }
@@ -123,6 +122,22 @@ class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
     }
 
     override fun hideLoading() {
+    }
+
+    override fun articleDataSuccess(result: BlogEntity?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun articleDataFail(errorMsg: String?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun unArticleDataSuccess(result: BlogEntity?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun unArticleDataFail(errorMsg: String?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

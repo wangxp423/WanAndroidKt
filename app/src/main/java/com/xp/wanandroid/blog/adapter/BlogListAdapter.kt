@@ -72,9 +72,13 @@ class BlogListAdapter(val context: Context, val datas: MutableList<Datas>) : Bas
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
         if (data.size > 0) {
+            val item = getItem(position)
             Intent(context, BlogActivity::class.java).run {
-                putExtra(Constant.BLOG_EXTRA_URL, datas[position].link)
-                putExtra(Constant.BLOG_EXTRA_TITLE, datas[position].title)
+                putExtra(Constant.BLOG_EXTRA_URL, item?.link)
+                putExtra(Constant.BLOG_EXTRA_TITLE, item?.title)
+                if (item?.originId != 0 || item?.collect) {
+                    putExtra(Constant.BLOG_EXTRA_ISCOLLECTED, true)
+                }
                 context.startActivity(this)
             }
         }

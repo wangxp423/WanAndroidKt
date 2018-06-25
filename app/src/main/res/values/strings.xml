@@ -55,4 +55,14 @@
 
 
     <string name="blog_title_search">搜索</string>
+    <string name="blog_title_loading">加载中...</string>
+    <string name="blog_content_share">分享</string>
+    <string name="blog_content_collect">收藏</string>
+    <string name="blog_content_collect_already">已收藏</string>
+    <string name="blog_content_use_browser">用系统浏览器打开</string>
+    <string name="blog_share_title">分享</string>
+    <string name="blog_share_type_title">分享专题</string>
+    <string name="blog_share_article_url">%1$s分享【%2$s】：%3$s</string>
+    <string name="blog_share_type_url">%1$s分享【%2$s】专题：http://www.wanandroid.com/article/list/0?cid=%3$d</string>
+    <string name="blog_outside_title">归为站外文章</string>
 </resources>

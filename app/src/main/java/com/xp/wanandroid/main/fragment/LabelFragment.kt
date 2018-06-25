@@ -12,7 +12,6 @@ import com.xp.wanandroid.base.BaseFragment
  */
 class LabelFragment : BaseFragment() {
     override fun cancelRequest() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }

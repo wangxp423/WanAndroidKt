@@ -132,6 +132,22 @@ class BlogSearchActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
     override fun hideLoading() {
     }
 
+    override fun articleDataSuccess(result: BlogEntity?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun articleDataFail(errorMsg: String?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun unArticleDataSuccess(result: BlogEntity?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun unArticleDataFail(errorMsg: String?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.blog_search_menu, menu)
         searchView = menu?.findItem(R.id.blog_search_memu_item_search)?.actionView as SearchView
