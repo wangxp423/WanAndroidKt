@@ -1,5 +1,6 @@
 package com.xp.wanandroid.main.fragment
 
+import android.view.View
 import com.xp.wanandroid.base.BaseFragment
 
 /**
@@ -11,6 +12,14 @@ import com.xp.wanandroid.base.BaseFragment
  * @修改备注：
  */
 class LabelFragment : BaseFragment() {
+    override fun getContentViewLayoutID(): Int = 0
+
+    override fun initView(view: View?) {
+    }
+
+    override fun initData() {
+    }
+
     override fun cancelRequest() {
     }
 

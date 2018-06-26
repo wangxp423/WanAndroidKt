@@ -54,22 +54,22 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".blog.MyLikeActivity"
+            android:name=".blog.activity.MyLikeActivity"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".blog.BlogSearchActivity"
+            android:name=".blog.activity.BlogSearchActivity"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".blog.BlogActivity"
+            android:name=".blog.activity.BlogActivity"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".blog.BlogTypeActivity"
+            android:name=".blog.activity.BlogTypeActivity"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />

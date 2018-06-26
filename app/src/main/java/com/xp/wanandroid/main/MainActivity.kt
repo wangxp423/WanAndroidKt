@@ -12,8 +12,8 @@ import android.view.MenuItem
 import android.widget.TextView
 import com.xp.wanandroid.R
 import com.xp.wanandroid.base.BaseImmersionBarActivity
-import com.xp.wanandroid.blog.BlogSearchActivity
-import com.xp.wanandroid.blog.MyLikeActivity
+import com.xp.wanandroid.blog.activity.BlogSearchActivity
+import com.xp.wanandroid.blog.activity.MyLikeActivity
 import com.xp.wanandroid.login.LoginActivity
 import com.xp.wanandroid.main.fragment.HomeFragment
 import com.xp.wanandroid.main.fragment.LabelFragment

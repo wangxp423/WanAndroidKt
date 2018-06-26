@@ -1,4 +1,4 @@
-package com.xp.wanandroid.blog
+package com.xp.wanandroid.blog.activity
 
 import android.content.Intent
 import android.net.Uri

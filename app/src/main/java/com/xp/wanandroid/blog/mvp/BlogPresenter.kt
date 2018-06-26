@@ -162,6 +162,44 @@ class BlogPresenter(val blogView: BlogContract.BlogView) : BlogContract.IBlogPre
         })
     }
 
+    override fun getBlogTypeDataList(page: Int, cid: Int) {
+        blogModel.getBlogTypeDataList(cid, page, object : RequestBackListener<BlogEntity> {
+            override fun onRequestSuccess(data: BlogEntity) {
+                LogUtil.d("Test", "getBlogTypeDataListSuccess = " + data)
+                if (data.errorCode == 0) {
+                    blogView.getDataListSuccess(data)
+                } else {
+                    blogView.getDataListFail(data.errorMsg)
+                }
+            }
+
+            override fun onRequestFail(errorMsg: String?) {
+                LogUtil.d("Test", "getBlogTypeDataListFail = " + errorMsg)
+                blogView.getDataListFail(errorMsg)
+            }
+
+        })
+    }
+
+    override fun loadMoreBlogTypeDataList(page: Int, cid: Int) {
+        blogModel.getBlogTypeDataList(cid, page, object : RequestBackListener<BlogEntity> {
+            override fun onRequestSuccess(data: BlogEntity) {
+                LogUtil.d("Test", "loadMoreBlogTypeDataListSuccess = " + data)
+                if (data.errorCode == 0) {
+                    blogView.loadMoreDataListSuccess(data)
+                } else {
+                    blogView.loadMoreDataListFail(data.errorMsg)
+                }
+            }
+
+            override fun onRequestFail(errorMsg: String?) {
+                LogUtil.d("Test", "loadMoreBlogTypeDataListFail = " + errorMsg)
+                blogView.loadMoreDataListFail(errorMsg)
+            }
+
+        })
+    }
+
     override fun cancleRequest() {
         blogModel.cancelRequest()
     }

@@ -1,4 +1,4 @@
-package com.xp.wanandroid.blog
+package com.xp.wanandroid.blog.activity
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView

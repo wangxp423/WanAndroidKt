@@ -22,6 +22,7 @@ object Constant {
     const val BLOG_EXTRA_CID = "blog_extra_cid"
     const val BLOG_EXTRA_TARGET = "blog_extra_target"
     const val BLOG_EXTRA_ISCOLLECTED = "blog_extra_iscollected"
+    const val BLOG_EXTRA_CONTENT_CHILDREN_DATA = "blog_extra_content_children_data"
     const val BLOG_SHARE_CONTENT_TYPE = "text/plain"
 
 }

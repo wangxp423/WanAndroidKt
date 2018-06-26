@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/blog_content_type_item_search"
+        android:title="@string/blog_title_search"
+        android:icon="@drawable/ic_action_search"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/blog_content_type_item_share"
+        android:orderInCategory="100"
+        android:title="@string/blog_content_share"
+        android:icon="@drawable/ic_action_share"
+        app:showAsAction="ifRoom" />
+</menu>

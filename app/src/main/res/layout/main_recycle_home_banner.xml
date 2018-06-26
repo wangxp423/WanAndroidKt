@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.xp.wanandroid.widget.HorizontalRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_home_banner_hrv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:listitem="@layout/main_recycle_item_home_banner">
+
+</com.xp.wanandroid.widget.HorizontalRecyclerView>

@@ -1,64 +1,57 @@
-package com.xp.wanandroid.blog
+package com.xp.wanandroid.blog.fragment
 
+import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.view.MenuItem
+import android.view.View
 import com.xp.wanandroid.R
-import com.xp.wanandroid.base.BaseImmersionBarActivity
-import com.xp.wanandroid.blog.adapter.BlogListAdapter
+import com.xp.wanandroid.base.BaseFragment
+import com.xp.wanandroid.blog.adapter.BlogTypeListAdapter
 import com.xp.wanandroid.blog.entity.BlogEntity
 import com.xp.wanandroid.blog.entity.Datas
 import com.xp.wanandroid.blog.mvp.BlogContract
 import com.xp.wanandroid.blog.mvp.BlogPresenter
+import com.xp.wanandroid.util.Constant
 import com.xp.wanandroid.util.LogUtil
 import com.xp.wanandroid.util.ToastUtil
-import kotlinx.android.synthetic.main.blog_activity_like.*
 import kotlinx.android.synthetic.main.blog_include_swipe_recycle.*
 
 /**
- * @类描述：我关注的人
+ * @类描述：博客文章分类fragment
  * @创建人：Wangxiaopan
- * @创建时间：2018/6/20 0020 11:16
+ * @创建时间：2018/6/26 0026 10:28
  * @修改人：
- * @修改时间：2018/6/20 0020 11:16
+ * @修改时间：2018/6/26 0026 10:28
  * @修改备注：
  */
-class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
+class BlogContentTypeFragment : BaseFragment(), BlogContract.BlogView {
+
+
     private val datas = mutableListOf<Datas>()
-    private val blogPresenter: BlogContract.IBlogPresenter by lazy { BlogPresenter(this) }
-    private val blogAdapter: BlogListAdapter by lazy { BlogListAdapter(this, datas) }
-    private var pageIndex = 0
+    private val blogTypePresenter: BlogContract.IBlogPresenter by lazy { BlogPresenter(this) }
+    private val blogAdapter: BlogTypeListAdapter by lazy { BlogTypeListAdapter(activity, datas) }
+    private var cid: Int = 0
+    private var pageIndex: Int = 0
+    override fun getContentViewLayoutID(): Int = R.layout.blog_include_swipe_recycle
 
-    override fun setLayoutId(): Int = R.layout.blog_activity_like
-
-    override fun initImmersionBar() {
-        super.initImmersionBar()
-        immersionBar.titleBar(R.id.main_collect_toolbar).init()
-    }
-
-    override fun initView() {
-        main_collect_toolbar.run {
-            title = getString(R.string.main_nav_menu_like)
-            setSupportActionBar(this)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        }
+    override fun initView(view: View?) {
         blog_include_srl.run {
+            isRefreshing = true
             setOnRefreshListener {
                 isRefreshing = true
                 blogAdapter.setEnableLoadMore(false)
                 pageIndex = 0
-                blogPresenter.getDataList(pageIndex)
+                blogTypePresenter.getBlogTypeDataList(pageIndex, cid)
             }
         }
         blog_include_rv.run {
-            layoutManager = LinearLayoutManager(this@MyLikeActivity)
+            layoutManager = LinearLayoutManager(activity)
             adapter = blogAdapter
         }
         blogAdapter.run {
-            isMyLike = true
             bindToRecyclerView(blog_include_rv)
             setOnLoadMoreListener({
                 pageIndex++
-                blogPresenter.loadMoreDataList(pageIndex)
+                blogTypePresenter.loadMoreBlogTypeDataList(pageIndex, cid)
             }, blog_include_rv)
             setEmptyView(R.layout.recycle_list_empty)
             onItemClickListener = this
@@ -67,14 +60,17 @@ class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
     }
 
     override fun initData() {
-        blogPresenter.getDataList(pageIndex)
+        cid = arguments.getInt(Constant.BLOG_EXTRA_CID)
+        blogTypePresenter.getBlogTypeDataList(pageIndex, cid)
     }
 
     override fun cancelRequest() {
+        blog_include_srl.isRefreshing = false
+        blogTypePresenter.cancleRequest()
     }
 
     override fun getDataListSuccess(result: BlogEntity?) {
-        LogUtil.d("Test", "获取数据  = " + result)
+        LogUtil.d("Test", "获取博客分类数据  = " + result)
         result?.data?.datas?.let {
             blogAdapter.run {
                 if (data.size > 0) {
@@ -94,10 +90,13 @@ class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
     }
 
     override fun getDataListZero() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun getDataListFail(errorMsg: String?) {
-        errorMsg?.let { ToastUtil.showShort(this, it) }
+        errorMsg?.let {
+            ToastUtil.showShort(activity, it)
+        }
     }
 
     override fun loadMoreDataListSuccess(result: BlogEntity?) {
@@ -114,14 +113,9 @@ class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
     }
 
     override fun loadMoreDataListFail(errorMsg: String?) {
-        errorMsg?.let { ToastUtil.showShort(this, it) }
-    }
-
-    override fun showLoading() {
-
-    }
-
-    override fun hideLoading() {
+        errorMsg?.let {
+            ToastUtil.showShort(activity, it)
+        }
     }
 
     override fun articleDataSuccess(result: BlogEntity?) {
@@ -140,17 +134,23 @@ class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == android.R.id.home) {
-            finish()
+    override fun showLoading() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun hideLoading() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    companion object {
+        fun newInstance(cid: Int): BlogContentTypeFragment {
+            val fragment = BlogContentTypeFragment()
+            val bundle = Bundle()
+            bundle.putInt(Constant.BLOG_EXTRA_CID, cid)
+            fragment.arguments = bundle
+            return fragment
         }
-        return super.onOptionsItemSelected(item)
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        blogAdapter.onDestory()
-    }
-
 
 }
+ 

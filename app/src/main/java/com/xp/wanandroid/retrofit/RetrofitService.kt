@@ -1,5 +1,6 @@
 import com.xp.wanandroid.blog.entity.BlogEntity
 import com.xp.wanandroid.login.entity.UserEntity
+import com.xp.wanandroid.main.entity.BannerEntity
 import kotlinx.coroutines.experimental.Deferred
 import retrofit2.http.*
 
@@ -9,15 +10,22 @@ import retrofit2.http.*
 interface RetrofitService {
 
     /**
+     * 首页Banner
+     * @return BannerResponse
+     */
+    @GET("/banner/json")
+    fun getBanner(): Deferred<BannerEntity>
+
+    /**
      * 首页数据
      * http://www.wanandroid.com/article/list/0/json
      * @param page page
      */
 
-//    @GET("/article/list/{page}/json")
-//    fun getHomeList(
-//            @Path("page") page: Int
-//    ): Deferred<HomeListResponse>
+    @GET("/article/list/{page}/json")
+    fun getHomeList(
+            @Path("page") page: Int
+    ): Deferred<BlogEntity>
 
     /**
      * 知识体系
@@ -32,11 +40,11 @@ interface RetrofitService {
      * @param page page
      * @param cid cid
      */
-//    @GET("/article/list/{page}/json")
-//    fun getArticleList(
-//            @Path("page") page: Int,
-//            @Query("cid") cid: Int
-//    ): Deferred<ArticleListResponse>
+    @GET("/article/list/{page}/json")
+    fun getArticleList(
+            @Path("page") page: Int,
+            @Query("cid") cid: Int
+    ): Deferred<BlogEntity>
 
     /**
      * 常用网站
@@ -140,13 +148,6 @@ interface RetrofitService {
             @Path("id") id: Int,
             @Field("originId") originId: Int = -1
     ): Deferred<BlogEntity>
-
-    /**
-     * 首页Banner
-     * @return BannerResponse
-     */
-//    @GET("/banner/json")
-//    fun getBanner(): Deferred<BannerResponse>
 
     /**
      * 我的常用网址

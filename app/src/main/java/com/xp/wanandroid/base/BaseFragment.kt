@@ -1,6 +1,10 @@
 package com.xp.wanandroid.base
 
+import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 
 
 /**
@@ -14,6 +18,23 @@ import android.support.v4.app.Fragment
 abstract class BaseFragment : Fragment() {
     protected var isFrist: Boolean = true
 
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        if (getContentViewLayoutID() != 0) {
+            return inflater?.inflate(getContentViewLayoutID(), null)
+        } else {
+            return super.onCreateView(inflater, container, savedInstanceState)
+        }
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView(view)
+        initData()
+    }
+
+    protected abstract fun getContentViewLayoutID(): Int
+    protected abstract fun initView(view: View?)
+    protected abstract fun initData()
     protected abstract fun cancelRequest()
 
     override fun onDestroyView() {

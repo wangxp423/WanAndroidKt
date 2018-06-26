@@ -24,6 +24,7 @@ class BlogModel : BlogContract.IBlogModel {
     private var likeListAsync: Deferred<BlogEntity>? = null
     private var articleCollectAsync: Deferred<BlogEntity>? = null
     private var collectOutSideArticleAsync: Deferred<BlogEntity>? = null
+    private var typeArticleListAsync: Deferred<BlogEntity>? = null
 
     override fun getDataListByKey(page: Int, key: String, listener: RequestBackListener<BlogEntity>) {
         async(UI) {
@@ -106,11 +107,30 @@ class BlogModel : BlogContract.IBlogModel {
         }
     }
 
+    override fun getBlogTypeDataList(cid: Int, page: Int, listener: RequestBackListener<BlogEntity>) {
+        async(UI) {
+            tryCatch({
+                it.printStackTrace()
+                listener.onRequestFail(it.toString())
+            }) {
+                typeArticleListAsync?.cancelByActive()
+                typeArticleListAsync = RetrofitHelper.retrofitService.getArticleList(page, cid)
+                val result = typeArticleListAsync?.await()
+                result ?: let {
+                    listener.onRequestFail(Constant.REQUEST_NULL)
+                    return@async
+                }
+                listener.onRequestSuccess(result)
+            }
+        }
+    }
+
     override fun cancelRequest() {
         searchListAsync?.cancelByActive()
         likeListAsync?.cancelByActive()
         articleCollectAsync?.cancelByActive()
         collectOutSideArticleAsync?.cancelByActive()
+        typeArticleListAsync?.cancelByActive()
 
     }
 }
