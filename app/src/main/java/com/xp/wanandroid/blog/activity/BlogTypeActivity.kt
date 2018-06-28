@@ -38,15 +38,17 @@ class BlogTypeActivity : BaseImmersionBarActivity() {
             setSupportActionBar(this)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
-        intent.extras?.let {
-            target = it.getBoolean(Constant.BLOG_EXTRA_TARGET, false)
-            firstTitle = it.getString(Constant.BLOG_EXTRA_TITLE)
-            blog_activity_blog_type_toolbar.title = firstTitle
+        intent.extras?.let { extras ->
+            target = extras.getBoolean(Constant.BLOG_EXTRA_TARGET, false)
+            extras.getString(Constant.BLOG_EXTRA_TITLE)?.let {
+                firstTitle = it
+                blog_activity_blog_type_toolbar.title = it
+            }
             if (target) {
-                list.add(BlogTypeEntity.Data.Children(it.getInt(Constant.BLOG_EXTRA_CID, 0), firstTitle,
+                list.add(BlogTypeEntity.Data.Children(extras.getInt(Constant.BLOG_EXTRA_CID, 0), firstTitle,
                         0, 0, 0, 0, null))
             } else {
-                it.getSerializable(Constant.BLOG_EXTRA_CONTENT_CHILDREN_DATA)?.let {
+                extras.getSerializable(Constant.BLOG_EXTRA_CONTENT_CHILDREN_DATA)?.let {
                     val data = it as BlogTypeEntity.Data
                     data.children?.let {
                         list.addAll(it)

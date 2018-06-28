@@ -1,6 +1,8 @@
 import com.xp.wanandroid.blog.entity.BlogEntity
+import com.xp.wanandroid.blog.entity.BlogTypeEntity
 import com.xp.wanandroid.login.entity.UserEntity
 import com.xp.wanandroid.main.entity.BannerEntity
+import com.xp.wanandroid.main.entity.HotLableEntity
 import kotlinx.coroutines.experimental.Deferred
 import retrofit2.http.*
 
@@ -31,8 +33,8 @@ interface RetrofitService {
      * 知识体系
      * http://www.wanandroid.com/tree/json
      */
-//    @GET("/tree/json")
-//    fun getTypeTreeList(): Deferred<TreeListResponse>
+    @GET("/tree/json")
+    fun getTypeTreeList(): Deferred<BlogTypeEntity>
 
     /**
      * 知识体系下的文章
@@ -47,18 +49,24 @@ interface RetrofitService {
     ): Deferred<BlogEntity>
 
     /**
+     * 我的常用网址
+     * @return FriendListResponse
+     */
+    @GET("/lg/collect/usertools/json")
+    fun getMyBookmarkList(): Deferred<HotLableEntity>
+    /**
      * 常用网站
      * http://www.wanandroid.com/friend/json
      */
-//    @GET("/friend/json")
-//    fun getFriendList(): Deferred<FriendListResponse>
+    @GET("/friend/json")
+    fun getHotUseList(): Deferred<HotLableEntity>
 
     /**
      * 大家都在搜
      * http://www.wanandroid.com/hotkey/json
      */
-//    @GET("/hotkey/json")
-//    fun getHotKeyList(): Deferred<HotKeyResponse>
+    @GET("/hotkey/json")
+    fun getHotSearchList(): Deferred<HotLableEntity>
 
     /**
      * 搜索
@@ -149,10 +157,4 @@ interface RetrofitService {
             @Field("originId") originId: Int = -1
     ): Deferred<BlogEntity>
 
-    /**
-     * 我的常用网址
-     * @return FriendListResponse
-     */
-//    @GET("/lg/collect/usertools/json")
-//    fun getBookmarkList(): Deferred<FriendListResponse>
 }

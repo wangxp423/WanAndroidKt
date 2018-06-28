@@ -1,10 +1,13 @@
 package com.xp.wanandroid.main.fragment
 
+import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.PagerSnapHelper
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import com.xp.wanandroid.R
 import com.xp.wanandroid.base.BaseFragment
 import com.xp.wanandroid.blog.adapter.BlogListAdapter
@@ -44,14 +47,20 @@ class HomeFragment : BaseFragment(), MainHomeContract.IMainHomeView {
     private val blogAdapter: BlogListAdapter by lazy { BlogListAdapter(activity, datas) }
     private var pageIndex: Int = 0
 
-    override fun getContentViewLayoutID(): Int = R.layout.main_fragment_home
+    private var rootView: View? = null
+    override fun getContentView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        rootView ?: let {
+            rootView = inflater?.inflate(R.layout.main_fragment_home, container, false)
+        }
+        return rootView
+    }
 
     override fun initView(view: View?) {
         bannerRecyclerView = View.inflate(activity, R.layout.main_recycle_home_banner, null) as HorizontalRecyclerView
         main_fragment_home_srl.run {
             isRefreshing = true
             setOnRefreshListener {
-                isRefreshing = true
+                showLoading()
                 blogAdapter.setEnableLoadMore(false)
                 cancelSwitchJob()
                 pageIndex = 0
@@ -77,7 +86,6 @@ class HomeFragment : BaseFragment(), MainHomeContract.IMainHomeView {
         blogAdapter.run {
             bindToRecyclerView(main_fragment_home_rv)
             setOnLoadMoreListener({
-                pageIndex++
                 homePresenter.loadMoreHomeDatalist(pageIndex)
             }, main_fragment_home_rv)
             setEmptyView(R.layout.recycle_list_empty)
@@ -87,7 +95,10 @@ class HomeFragment : BaseFragment(), MainHomeContract.IMainHomeView {
         }
     }
 
+    fun smoothScrollToPosition() = main_fragment_home_rv.scrollToPosition(0)
+
     override fun initData() {
+        showLoading()
         homePresenter.getHomeDataList(pageIndex)
         homePresenter.getBannerDataList()
     }
@@ -117,11 +128,12 @@ class HomeFragment : BaseFragment(), MainHomeContract.IMainHomeView {
     }
 
     override fun cancelRequest() {
-        main_fragment_home_srl.isRefreshing = false
+        hideLoading()
         homePresenter.cancelRequest()
     }
 
     override fun getDataListSuccess(result: BlogEntity?) {
+        hideLoading()
         result?.data?.datas?.let {
             blogAdapter.run {
                 if (data.size > 0) {
@@ -129,15 +141,16 @@ class HomeFragment : BaseFragment(), MainHomeContract.IMainHomeView {
                 } else {
                     addData(it)
                 }
-                loadMoreComplete()
-                setEnableLoadMore(true)
-                if (pageIndex > result.data.pageCount) {
+                if (result.data.over) {
                     loadMoreEnd()
                     setEnableLoadMore(false)
+                } else {
+                    pageIndex++
+                    loadMoreComplete()
+                    setEnableLoadMore(true)
                 }
             }
         }
-        main_fragment_home_srl.isRefreshing = false
     }
 
     override fun getDataListZero() {
@@ -145,6 +158,7 @@ class HomeFragment : BaseFragment(), MainHomeContract.IMainHomeView {
     }
 
     override fun getDataListFail(errorMsg: String?) {
+        hideLoading()
         errorMsg?.let {
             ToastUtil.showShort(activity, it)
         }
@@ -154,16 +168,20 @@ class HomeFragment : BaseFragment(), MainHomeContract.IMainHomeView {
         result?.data?.datas?.let {
             blogAdapter.run {
                 addData(it)
-                loadMoreComplete()
-                setEnableLoadMore(true)
-                if (result.data.curPage > result.data.pageCount) {
+                if (result.data.over) {
                     loadMoreEnd()
+//                    setEnableLoadMore(false)
+                } else {
+                    pageIndex++
+                    loadMoreComplete()
+                    setEnableLoadMore(true)
                 }
             }
         }
     }
 
     override fun loadMoreDataListFail(errorMsg: String?) {
+        blogAdapter.loadMoreFail()
         errorMsg?.let {
             ToastUtil.showShort(activity, it)
         }
@@ -196,11 +214,11 @@ class HomeFragment : BaseFragment(), MainHomeContract.IMainHomeView {
     }
 
     override fun showLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        main_fragment_home_srl.isRefreshing = true
     }
 
     override fun hideLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        main_fragment_home_srl.isRefreshing = false
     }
 
     private val onBannerTouchListener = View.OnTouchListener { _, event ->

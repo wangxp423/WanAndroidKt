@@ -2,7 +2,9 @@ package com.xp.wanandroid.blog.fragment
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.xp.wanandroid.R
 import com.xp.wanandroid.base.BaseFragment
 import com.xp.wanandroid.blog.adapter.BlogTypeListAdapter
@@ -11,7 +13,6 @@ import com.xp.wanandroid.blog.entity.Datas
 import com.xp.wanandroid.blog.mvp.BlogContract
 import com.xp.wanandroid.blog.mvp.BlogPresenter
 import com.xp.wanandroid.util.Constant
-import com.xp.wanandroid.util.LogUtil
 import com.xp.wanandroid.util.ToastUtil
 import kotlinx.android.synthetic.main.blog_include_swipe_recycle.*
 
@@ -24,20 +25,25 @@ import kotlinx.android.synthetic.main.blog_include_swipe_recycle.*
  * @修改备注：
  */
 class BlogContentTypeFragment : BaseFragment(), BlogContract.BlogView {
-
-
+    private var rootView: View? = null
     private val datas = mutableListOf<Datas>()
     private val blogTypePresenter: BlogContract.IBlogPresenter by lazy { BlogPresenter(this) }
     private val blogAdapter: BlogTypeListAdapter by lazy { BlogTypeListAdapter(activity, datas) }
     private var cid: Int = 0
     private var pageIndex: Int = 0
-    override fun getContentViewLayoutID(): Int = R.layout.blog_include_swipe_recycle
+
+    override fun getContentView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        rootView ?: let {
+            rootView = inflater?.inflate(R.layout.blog_include_swipe_recycle, container, false)
+        }
+        return rootView
+    }
 
     override fun initView(view: View?) {
         blog_include_srl.run {
-            isRefreshing = true
+            showLoading()
             setOnRefreshListener {
-                isRefreshing = true
+                showLoading()
                 blogAdapter.setEnableLoadMore(false)
                 pageIndex = 0
                 blogTypePresenter.getBlogTypeDataList(pageIndex, cid)
@@ -48,9 +54,8 @@ class BlogContentTypeFragment : BaseFragment(), BlogContract.BlogView {
             adapter = blogAdapter
         }
         blogAdapter.run {
-            bindToRecyclerView(blog_include_rv)
+            setEnableLoadMore(false)
             setOnLoadMoreListener({
-                pageIndex++
                 blogTypePresenter.loadMoreBlogTypeDataList(pageIndex, cid)
             }, blog_include_rv)
             setEmptyView(R.layout.recycle_list_empty)
@@ -67,10 +72,11 @@ class BlogContentTypeFragment : BaseFragment(), BlogContract.BlogView {
     override fun cancelRequest() {
         blog_include_srl.isRefreshing = false
         blogTypePresenter.cancleRequest()
+        blogAdapter.loadMoreComplete()
     }
 
     override fun getDataListSuccess(result: BlogEntity?) {
-        LogUtil.d("Test", "获取博客分类数据  = " + result)
+        hideLoading()
         result?.data?.datas?.let {
             blogAdapter.run {
                 if (data.size > 0) {
@@ -78,15 +84,16 @@ class BlogContentTypeFragment : BaseFragment(), BlogContract.BlogView {
                 } else {
                     addData(it)
                 }
-                loadMoreComplete()
-                setEnableLoadMore(true)
-                if (pageIndex > result.data.pageCount) {
+                if (result.data.over) {
                     loadMoreEnd()
                     setEnableLoadMore(false)
+                } else {
+                    pageIndex++
+                    loadMoreComplete()
+                    setEnableLoadMore(true)
                 }
             }
         }
-        blog_include_srl.isRefreshing = false
     }
 
     override fun getDataListZero() {
@@ -94,6 +101,8 @@ class BlogContentTypeFragment : BaseFragment(), BlogContract.BlogView {
     }
 
     override fun getDataListFail(errorMsg: String?) {
+        blogAdapter.setEnableLoadMore(false)
+        hideLoading()
         errorMsg?.let {
             ToastUtil.showShort(activity, it)
         }
@@ -103,16 +112,20 @@ class BlogContentTypeFragment : BaseFragment(), BlogContract.BlogView {
         result?.data?.datas?.let {
             blogAdapter.run {
                 addData(it)
-                loadMoreComplete()
-                setEnableLoadMore(true)
-                if (result.data.curPage > result.data.pageCount) {
+                if (result.data.over) {
                     loadMoreEnd()
+                    setEnableLoadMore(false)
+                } else {
+                    pageIndex++
+                    loadMoreComplete()
+                    setEnableLoadMore(true)
                 }
             }
         }
     }
 
     override fun loadMoreDataListFail(errorMsg: String?) {
+        blogAdapter.loadMoreFail()
         errorMsg?.let {
             ToastUtil.showShort(activity, it)
         }
@@ -135,11 +148,11 @@ class BlogContentTypeFragment : BaseFragment(), BlogContract.BlogView {
     }
 
     override fun showLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        blog_include_srl.isRefreshing = true
     }
 
     override fun hideLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        blog_include_srl.isRefreshing = false
     }
 
     companion object {

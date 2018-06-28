@@ -19,7 +19,6 @@ import com.xp.wanandroid.main.fragment.HomeFragment
 import com.xp.wanandroid.main.fragment.LabelFragment
 import com.xp.wanandroid.main.fragment.TypeFragment
 import com.xp.wanandroid.util.Constant
-import com.xp.wanandroid.util.LogUtil
 import com.xp.wanandroid.util.Preference
 import com.xp.wanandroid.util.ToastUtil
 import kotlinx.android.synthetic.main.main_activity_main.*
@@ -114,7 +113,6 @@ class MainActivity : BaseImmersionBarActivity() {
         if (isLogin && tvUserName.text.toString() != username) {
             tvUserName.text = username
             tvLogout.text = getString(R.string.main_nav_header_logout)
-//            homeFragment?.refreshData()
         }
     }
 
@@ -126,7 +124,12 @@ class MainActivity : BaseImmersionBarActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.main_toolbar_menu_item_hot -> {
-                LogUtil.d("Test", "点击热门")
+                if (currentIndex == R.id.main_toolbar_menu_item_hot) {
+                    labelFragment?.refreshData()
+                }
+                setFragment(R.id.main_toolbar_menu_item_hot)
+                currentIndex = R.id.main_toolbar_menu_item_hot
+                return true
             }
             R.id.main_toolbar_menu_item_search -> {
                 Intent(this, BlogSearchActivity::class.java).run {
@@ -142,13 +145,17 @@ class MainActivity : BaseImmersionBarActivity() {
         when (fragment) {
             is HomeFragment -> homeFragment ?: let { homeFragment = fragment }
             is TypeFragment -> typeFragment ?: let { typeFragment = fragment }
-//            is HomeFragment -> homeFragment?:let { homeFragment = fragment }
+            is LabelFragment -> labelFragment ?: let { labelFragment = fragment }
         }
     }
 
     override fun onBackPressed() {
         if (main_activity_main_dl.isDrawerOpen(GravityCompat.START)) {
             main_activity_main_dl.closeDrawer(GravityCompat.START)
+            return
+        }
+        if (currentIndex == R.id.main_toolbar_menu_item_hot) {
+            bottomNavItemSelected(main_activity_main_bottomnav.selectedItemId)
             return
         }
         val currentTime = System.currentTimeMillis()
@@ -169,7 +176,7 @@ class MainActivity : BaseImmersionBarActivity() {
         when (id) {
             R.id.main_bottom_nav_item_home -> {
                 if (currentIndex == R.id.main_bottom_nav_item_home) {
-                    LogUtil.d("Test", "本来就是首页")
+                    homeFragment?.smoothScrollToPosition()
                 }
                 currentIndex = R.id.main_bottom_nav_item_home
                 return true
@@ -177,7 +184,7 @@ class MainActivity : BaseImmersionBarActivity() {
 
             R.id.main_bottom_nav_item_type -> {
                 if (currentIndex == R.id.main_bottom_nav_item_type) {
-                    LogUtil.d("Test", "本来就是分类")
+                    typeFragment?.smoothScrollToPosition()
                 }
                 currentIndex = R.id.main_bottom_nav_item_type
                 return true
@@ -206,6 +213,12 @@ class MainActivity : BaseImmersionBarActivity() {
                     add(R.id.main_activity_main_content, it)
                 }
             }
+            labelFragment ?: let {
+                LabelFragment().let {
+                    labelFragment = it
+                    add(R.id.main_activity_main_content, it)
+                }
+            }
             hideFragment(this)
             when (index) {
                 R.id.main_bottom_nav_item_home -> {
@@ -222,8 +235,9 @@ class MainActivity : BaseImmersionBarActivity() {
                 }
                 R.id.main_toolbar_menu_item_hot -> {
                     main_activity_main_toolbar.title = getString(R.string.main_toolbar_menu_hot)
-//                    commonUseFragment?.let {
-//                        this.show(it)
+                    labelFragment?.let {
+                        this.show(it)
+                    }
                 }
             }
         }.commit()
@@ -232,6 +246,7 @@ class MainActivity : BaseImmersionBarActivity() {
     private fun hideFragment(transaction: FragmentTransaction) {
         homeFragment?.let { transaction.hide(it) }
         typeFragment?.let { transaction.hide(it) }
+        labelFragment?.let { transaction.hide(it) }
     }
 
 
@@ -268,7 +283,6 @@ class MainActivity : BaseImmersionBarActivity() {
                     tvUserName.text = username
                     tvLogout.text = getString(R.string.main_nav_header_logout)
                 }
-//                homeFragment?.refreshData()
             }
             MAIN_LIKE_REQUEST_CODE -> {
 

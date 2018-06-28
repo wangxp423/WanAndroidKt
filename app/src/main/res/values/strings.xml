@@ -38,6 +38,9 @@
     <string name="main_collect_cancel_success">取消收藏成功</string>
     <string name="main_collect_cancel_failed">取消收藏失败：%1$s</string>
     <string name="main_collect_list_no_data">这里空空如也...</string>
+    <string name="main_hot_lable_my_bookmark">我的书签</string>
+    <string name="main_hot_lable_hot_search">大家都在搜</string>
+    <string name="main_hot_lable_hot_use">常用网站</string>
 
 
     <string name="login_tip_login_first">请先登录...</string>

@@ -27,7 +27,7 @@ class BlogTypePagerAdapter(val list: List<BlogTypeEntity.Data.Children>, fm: Fra
     }
 
     override fun getCount(): Int {
-        return listFragment.size
+        return list.size
     }
 
     override fun getPageTitle(position: Int): CharSequence = list[position].name

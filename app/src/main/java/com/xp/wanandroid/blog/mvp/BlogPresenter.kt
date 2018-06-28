@@ -33,6 +33,25 @@ class BlogPresenter(val blogView: BlogContract.BlogView) : BlogContract.IBlogPre
         })
     }
 
+    override fun loadMoreDataListByKey(page: Int, key: String) {
+        blogModel.getDataListByKey(page, key, object : RequestBackListener<BlogEntity> {
+            override fun onRequestSuccess(data: BlogEntity) {
+                LogUtil.d("Test", "loadMoreDataListByKeySuccess = " + data)
+                if (data.errorCode == 0) {
+                    blogView.loadMoreDataListSuccess(data)
+                } else {
+                    blogView.loadMoreDataListFail(data.errorMsg)
+                }
+            }
+
+            override fun onRequestFail(errorMsg: String?) {
+                LogUtil.d("Test", "loadMoreDataListByKeyFail = " + errorMsg)
+                blogView.loadMoreDataListFail(errorMsg)
+            }
+
+        })
+    }
+
     override fun getDataList(page: Int) {
         blogModel.getDataList(page, object : RequestBackListener<BlogEntity> {
             override fun onRequestSuccess(data: BlogEntity) {
@@ -52,8 +71,10 @@ class BlogPresenter(val blogView: BlogContract.BlogView) : BlogContract.IBlogPre
         })
     }
 
-    override fun loadMoreDataListByKey(page: Int, key: String) {
-        blogModel.getDataListByKey(page, key, object : RequestBackListener<BlogEntity> {
+
+
+    override fun loadMoreDataList(page: Int) {
+        blogModel.getDataList(page, object : RequestBackListener<BlogEntity> {
             override fun onRequestSuccess(data: BlogEntity) {
                 LogUtil.d("Test", "loadMoreDataListSuccess = " + data)
                 if (data.errorCode == 0) {
@@ -65,25 +86,6 @@ class BlogPresenter(val blogView: BlogContract.BlogView) : BlogContract.IBlogPre
 
             override fun onRequestFail(errorMsg: String?) {
                 LogUtil.d("Test", "loadMoreDataListFail = " + errorMsg)
-                blogView.loadMoreDataListFail(errorMsg)
-            }
-
-        })
-    }
-
-    override fun loadMoreDataList(page: Int) {
-        blogModel.getDataList(page, object : RequestBackListener<BlogEntity> {
-            override fun onRequestSuccess(data: BlogEntity) {
-                LogUtil.d("Test", "refreshDataListSuccess = " + data)
-                if (data.errorCode == 0) {
-                    blogView.loadMoreDataListSuccess(data)
-                } else {
-                    blogView.loadMoreDataListFail(data.errorMsg)
-                }
-            }
-
-            override fun onRequestFail(errorMsg: String?) {
-                LogUtil.d("Test", "refreshDataListFail = " + errorMsg)
                 blogView.loadMoreDataListFail(errorMsg)
             }
 

@@ -9,7 +9,6 @@ import com.xp.wanandroid.blog.entity.BlogEntity
 import com.xp.wanandroid.blog.entity.Datas
 import com.xp.wanandroid.blog.mvp.BlogContract
 import com.xp.wanandroid.blog.mvp.BlogPresenter
-import com.xp.wanandroid.util.LogUtil
 import com.xp.wanandroid.util.ToastUtil
 import kotlinx.android.synthetic.main.blog_activity_like.*
 import kotlinx.android.synthetic.main.blog_include_swipe_recycle.*
@@ -44,7 +43,7 @@ class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
         blog_include_srl.run {
             isRefreshing = true
             setOnRefreshListener {
-                isRefreshing = true
+                showLoading()
                 blogAdapter.setEnableLoadMore(false)
                 pageIndex = 0
                 blogPresenter.getDataList(pageIndex)
@@ -58,7 +57,6 @@ class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
             isMyLike = true
             bindToRecyclerView(blog_include_rv)
             setOnLoadMoreListener({
-                pageIndex++
                 blogPresenter.loadMoreDataList(pageIndex)
             }, blog_include_rv)
             setEmptyView(R.layout.recycle_list_empty)
@@ -68,6 +66,7 @@ class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
     }
 
     override fun initData() {
+        showLoading()
         blogPresenter.getDataList(pageIndex)
     }
 
@@ -75,7 +74,7 @@ class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
     }
 
     override fun getDataListSuccess(result: BlogEntity?) {
-        LogUtil.d("Test", "获取数据  = " + result)
+        hideLoading()
         result?.data?.datas?.let {
             blogAdapter.run {
                 if (data.size > 0) {
@@ -83,21 +82,23 @@ class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
                 } else {
                     addData(it)
                 }
-                loadMoreComplete()
-                setEnableLoadMore(true)
-                if (pageIndex > result.data.pageCount) {
+                if (result.data.over) {
                     loadMoreEnd()
                     setEnableLoadMore(false)
+                } else {
+                    pageIndex++
+                    loadMoreComplete()
+                    setEnableLoadMore(true)
                 }
             }
         }
-        blog_include_srl.isRefreshing = false
     }
 
     override fun getDataListZero() {
     }
 
     override fun getDataListFail(errorMsg: String?) {
+        hideLoading()
         errorMsg?.let { ToastUtil.showShort(this, it) }
     }
 
@@ -105,24 +106,29 @@ class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
         result?.data?.datas?.let {
             blogAdapter.run {
                 addData(it)
-                loadMoreComplete()
-                setEnableLoadMore(true)
-                if (result.data.curPage > result.data.pageCount) {
+                if (result.data.over) {
                     loadMoreEnd()
+//                    setEnableLoadMore(false)
+                } else {
+                    pageIndex++
+                    loadMoreComplete()
+                    setEnableLoadMore(true)
                 }
             }
         }
     }
 
     override fun loadMoreDataListFail(errorMsg: String?) {
+        blogAdapter.loadMoreFail()
         errorMsg?.let { ToastUtil.showShort(this, it) }
     }
 
     override fun showLoading() {
-
+        blog_include_srl.isRefreshing = true
     }
 
     override fun hideLoading() {
+        blog_include_srl.isRefreshing = false
     }
 
     override fun articleDataSuccess(result: BlogEntity?) {

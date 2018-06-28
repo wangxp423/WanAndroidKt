@@ -16,23 +16,19 @@ import android.view.ViewGroup
  * @修改备注：
  */
 abstract class BaseFragment : Fragment() {
-    protected var isFrist: Boolean = true
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if (getContentViewLayoutID() != 0) {
-            return inflater?.inflate(getContentViewLayoutID(), null)
-        } else {
-            return super.onCreateView(inflater, container, savedInstanceState)
-        }
+        return getContentView(inflater, container, savedInstanceState)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         initView(view)
         initData()
     }
 
-    protected abstract fun getContentViewLayoutID(): Int
+
+    protected abstract fun getContentView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
     protected abstract fun initView(view: View?)
     protected abstract fun initData()
     protected abstract fun cancelRequest()

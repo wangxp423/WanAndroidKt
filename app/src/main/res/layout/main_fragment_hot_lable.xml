@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zhy="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/srl_main_fragment_hot_lable"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:background="@drawable/list_item_selector"
+                android:padding="@dimen/dp_10"
+                android:text="@string/main_hot_lable_my_bookmark"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+            <com.zhy.view.flowlayout.TagFlowLayout
+                android:id="@+id/tfl_main_fragment_hot_lable_bookmark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:paddingStart="@dimen/dp_10"
+                zhy:max_select="0" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:background="@drawable/list_item_selector"
+                android:padding="@dimen/dp_10"
+                android:text="@string/main_hot_lable_hot_search"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+            <com.zhy.view.flowlayout.TagFlowLayout
+                android:id="@+id/tfl_main_fragment_hot_lable_hotsearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:paddingStart="@dimen/dp_10"
+                zhy:max_select="0" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:background="@drawable/list_item_selector"
+                android:padding="@dimen/dp_10"
+                android:text="@string/main_hot_lable_hot_use"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+            <com.zhy.view.flowlayout.TagFlowLayout
+                android:id="@+id/tfl_main_fragment_hot_lable_hotuse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:paddingStart="@dimen/dp_10"
+                zhy:max_select="0" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+</android.support.v4.widget.SwipeRefreshLayout>
