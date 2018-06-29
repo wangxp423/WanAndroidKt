@@ -1,0 +1,79 @@
+{
+  "errorCode": 0,
+  "errorMsg": "",
+  "data": [
+    {
+      "courseId": 13,
+      "id": 150,
+      "name": "我的博客",
+      "order": 1,
+      "parentChapterId": 0,
+      "visible": 1,
+      "children": [
+        {
+          "children": [],
+          "courseId": 13,
+          "id": 1,
+          "name": "Java 设计模式",
+          "order": 1000,
+          "parentChapterId": 150,
+          "visible": 1
+        },
+        {
+          "children": [],
+          "courseId": 13,
+          "id": 2,
+          "name": "Java 网络协议",
+          "order": 1001,
+          "parentChapterId": 150,
+          "visible": 1
+        },
+        {
+          "children": [],
+          "courseId": 13,
+          "id": 3,
+          "name": "Kotlin",
+          "order": 1002,
+          "parentChapterId": 150,
+          "visible": 1
+        },
+        {
+          "children": [],
+          "courseId": 13,
+          "id": 4,
+          "name": "数据结构和算法",
+          "order": 1002,
+          "parentChapterId": 150,
+          "visible": 1
+        },
+        {
+          "children": [],
+          "courseId": 13,
+          "id": 5,
+          "name": "Android相关",
+          "order": 1002,
+          "parentChapterId": 150,
+          "visible": 1
+        },
+        {
+          "children": [],
+          "courseId": 13,
+          "id": 6,
+          "name": "Gradle构建",
+          "order": 1002,
+          "parentChapterId": 150,
+          "visible": 1
+        },
+        {
+          "children": [],
+          "courseId": 13,
+          "id": 7,
+          "name": "github代码",
+          "order": 1002,
+          "parentChapterId": 150,
+          "visible": 1
+        }
+      ]
+    }
+  ]
+}

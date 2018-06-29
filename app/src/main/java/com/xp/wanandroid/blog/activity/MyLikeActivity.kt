@@ -99,7 +99,7 @@ class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
 
     override fun getDataListFail(errorMsg: String?) {
         hideLoading()
-        errorMsg?.let { ToastUtil.showShort(this, it) }
+        errorMsg?.let { ToastUtil.showShort(it) }
     }
 
     override fun loadMoreDataListSuccess(result: BlogEntity?) {
@@ -120,7 +120,7 @@ class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
 
     override fun loadMoreDataListFail(errorMsg: String?) {
         blogAdapter.loadMoreFail()
-        errorMsg?.let { ToastUtil.showShort(this, it) }
+        errorMsg?.let { ToastUtil.showShort(it) }
     }
 
     override fun showLoading() {

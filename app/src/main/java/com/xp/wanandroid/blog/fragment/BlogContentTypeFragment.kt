@@ -27,9 +27,10 @@ import kotlinx.android.synthetic.main.blog_include_swipe_recycle.*
 class BlogContentTypeFragment : BaseFragment(), BlogContract.BlogView {
     private var rootView: View? = null
     private val datas = mutableListOf<Datas>()
-    private val blogTypePresenter: BlogContract.IBlogPresenter by lazy { BlogPresenter(this) }
+    private val blogTypePresenter: BlogPresenter by lazy { BlogPresenter(this) }
     private val blogAdapter: BlogTypeListAdapter by lazy { BlogTypeListAdapter(activity, datas) }
     private var cid: Int = 0
+    private var isMyBlog: Boolean = false
     private var pageIndex: Int = 0
 
     override fun getContentView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -40,13 +41,19 @@ class BlogContentTypeFragment : BaseFragment(), BlogContract.BlogView {
     }
 
     override fun initView(view: View?) {
+        cid = arguments.getInt(Constant.BLOG_EXTRA_CID)
+        isMyBlog = arguments.getBoolean(Constant.BLOG_EXTRA_MY_BLOG)
         blog_include_srl.run {
             showLoading()
             setOnRefreshListener {
                 showLoading()
                 blogAdapter.setEnableLoadMore(false)
                 pageIndex = 0
-                blogTypePresenter.getBlogTypeDataList(pageIndex, cid)
+                if (isMyBlog) {
+                    blogTypePresenter.getMyBlogData(cid)
+                } else {
+                    blogTypePresenter.getBlogTypeDataList(pageIndex, cid)
+                }
             }
         }
         blog_include_rv.run {
@@ -54,6 +61,7 @@ class BlogContentTypeFragment : BaseFragment(), BlogContract.BlogView {
             adapter = blogAdapter
         }
         blogAdapter.run {
+            isMyBlog = this@BlogContentTypeFragment.isMyBlog
             setEnableLoadMore(false)
             setOnLoadMoreListener({
                 blogTypePresenter.loadMoreBlogTypeDataList(pageIndex, cid)
@@ -65,8 +73,11 @@ class BlogContentTypeFragment : BaseFragment(), BlogContract.BlogView {
     }
 
     override fun initData() {
-        cid = arguments.getInt(Constant.BLOG_EXTRA_CID)
-        blogTypePresenter.getBlogTypeDataList(pageIndex, cid)
+        if (isMyBlog) {
+            blogTypePresenter.getMyBlogData(cid)
+        } else {
+            blogTypePresenter.getBlogTypeDataList(pageIndex, cid)
+        }
     }
 
     override fun cancelRequest() {
@@ -104,7 +115,7 @@ class BlogContentTypeFragment : BaseFragment(), BlogContract.BlogView {
         blogAdapter.setEnableLoadMore(false)
         hideLoading()
         errorMsg?.let {
-            ToastUtil.showShort(activity, it)
+            ToastUtil.showShort(it)
         }
     }
 
@@ -127,7 +138,7 @@ class BlogContentTypeFragment : BaseFragment(), BlogContract.BlogView {
     override fun loadMoreDataListFail(errorMsg: String?) {
         blogAdapter.loadMoreFail()
         errorMsg?.let {
-            ToastUtil.showShort(activity, it)
+            ToastUtil.showShort(it)
         }
     }
 
@@ -156,10 +167,11 @@ class BlogContentTypeFragment : BaseFragment(), BlogContract.BlogView {
     }
 
     companion object {
-        fun newInstance(cid: Int): BlogContentTypeFragment {
+        fun newInstance(cid: Int, isMyBlog: Boolean): BlogContentTypeFragment {
             val fragment = BlogContentTypeFragment()
             val bundle = Bundle()
             bundle.putInt(Constant.BLOG_EXTRA_CID, cid)
+            bundle.putBoolean(Constant.BLOG_EXTRA_MY_BLOG, isMyBlog)
             fragment.arguments = bundle
             return fragment
         }

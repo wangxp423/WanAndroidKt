@@ -13,6 +13,7 @@ import android.widget.TextView
 import com.xp.wanandroid.R
 import com.xp.wanandroid.base.BaseImmersionBarActivity
 import com.xp.wanandroid.blog.activity.BlogSearchActivity
+import com.xp.wanandroid.blog.activity.MyCsdnBlogActivity
 import com.xp.wanandroid.blog.activity.MyLikeActivity
 import com.xp.wanandroid.login.LoginActivity
 import com.xp.wanandroid.main.fragment.HomeFragment
@@ -163,7 +164,7 @@ class MainActivity : BaseImmersionBarActivity() {
             super.onBackPressed()
             finish()
         } else {
-            ToastUtil.showLong(this, R.string.main_double_click_exit)
+            ToastUtil.showLong(R.string.main_double_click_exit)
             lastTime = System.currentTimeMillis()
         }
     }
@@ -257,7 +258,7 @@ class MainActivity : BaseImmersionBarActivity() {
                     Intent(this, LoginActivity::class.java).run {
                         startActivityForResult(this, MAIN_LOGIN_REQUEST_CODE)
                     }
-                    ToastUtil.showShort(this, R.string.login_tip_login_first)
+                    ToastUtil.showShort(R.string.login_tip_login_first)
                     return true
                 }
                 Intent(this, MyLikeActivity::class.java).run {
@@ -266,6 +267,11 @@ class MainActivity : BaseImmersionBarActivity() {
             }
             R.id.main_nav_item_about -> {
                 Intent(this, AboutUsActivity::class.java).run {
+                    startActivity(this)
+                }
+            }
+            R.id.main_nav_item_csdn -> {
+                Intent(this, MyCsdnBlogActivity::class.java).run {
                     startActivity(this)
                 }
             }

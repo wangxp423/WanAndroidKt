@@ -49,7 +49,7 @@ class BlogListAdapter(val context: Context, val datas: MutableList<Datas>) : Bas
             when (view?.id) {
                 R.id.main_recycle_item_type -> {
                     item.chapterName ?: let {
-                        ToastUtil.showShort(context, "类型为空！！")
+                        ToastUtil.showShort("类型为空！！")
                         return
                     }
                     Intent(context, BlogTypeActivity::class.java).run {
@@ -95,9 +95,9 @@ class BlogListAdapter(val context: Context, val datas: MutableList<Datas>) : Bas
             override fun onRequestSuccess(data: BlogEntity) {
                 if (data?.errorCode == 0) {
                     if (isAdd) {
-                        ToastUtil.showShort(context, context.getString(R.string.main_collect_success))
+                        ToastUtil.showShort(context.getString(R.string.main_collect_success))
                     } else {
-                        ToastUtil.showShort(context, context.getString(R.string.main_collect_cancel_success))
+                        ToastUtil.showShort(context.getString(R.string.main_collect_cancel_success))
                     }
                     if (isMyLike) {
                         remove(position)
@@ -112,7 +112,7 @@ class BlogListAdapter(val context: Context, val datas: MutableList<Datas>) : Bas
             }
 
             override fun onRequestFail(errorMsg: String?) {
-                errorMsg?.let { ToastUtil.showShort(context, errorMsg) }
+                errorMsg?.let { ToastUtil.showShort(errorMsg) }
             }
         })
     }

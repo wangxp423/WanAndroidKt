@@ -91,12 +91,12 @@ class BlogActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
     }
 
     override fun articleDataSuccess(result: BlogEntity?) {
-        ToastUtil.showShort(this, getString(R.string.main_collect_success))
+        ToastUtil.showShort(getString(R.string.main_collect_success))
     }
 
     override fun articleDataFail(errorMsg: String?) {
         errorMsg?.let {
-            ToastUtil.showShort(this, getString(R.string.main_collect_failed, errorMsg))
+            ToastUtil.showShort(getString(R.string.main_collect_failed, errorMsg))
         }
     }
 
@@ -134,7 +134,7 @@ class BlogActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
             }
             R.id.blog_content_menu_item_collect -> {
                 if (isCollect) {
-                    ToastUtil.showShort(this, getString(R.string.blog_content_collect_already))
+                    ToastUtil.showShort(getString(R.string.blog_content_collect_already))
                     return true
                 }
                 if (shareId == 0) {

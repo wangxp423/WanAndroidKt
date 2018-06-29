@@ -13,4 +13,9 @@
         android:icon="@drawable/ic_action_about"
         android:title="@string/main_nav_menu_about" />
 
+    <item
+        android:id="@+id/main_nav_item_csdn"
+        android:icon="@drawable/ic_assignment_black_24dp"
+        android:title="@string/main_nav_menu_csdn" />
+
 </menu>

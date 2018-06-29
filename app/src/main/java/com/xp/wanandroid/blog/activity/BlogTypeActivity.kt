@@ -20,10 +20,11 @@ import kotlinx.android.synthetic.main.blog_activity_blog_type.*
  * @修改备注：
  */
 class BlogTypeActivity : BaseImmersionBarActivity() {
+    private var isMyBlog: Boolean = false
     private lateinit var firstTitle: String
     private val list = mutableListOf<BlogTypeEntity.Data.Children>()
     private var target: Boolean = false
-    private val blogTypePagerAdapter: BlogTypePagerAdapter by lazy { BlogTypePagerAdapter(list, supportFragmentManager) }
+    private val blogTypePagerAdapter: BlogTypePagerAdapter by lazy { BlogTypePagerAdapter(list, supportFragmentManager, isMyBlog) }
 
 
     override fun setLayoutId(): Int = R.layout.blog_activity_blog_type
@@ -39,6 +40,7 @@ class BlogTypeActivity : BaseImmersionBarActivity() {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
         intent.extras?.let { extras ->
+            isMyBlog = extras.getBoolean(Constant.BLOG_EXTRA_MY_BLOG)
             target = extras.getBoolean(Constant.BLOG_EXTRA_TARGET, false)
             extras.getString(Constant.BLOG_EXTRA_TITLE)?.let {
                 firstTitle = it

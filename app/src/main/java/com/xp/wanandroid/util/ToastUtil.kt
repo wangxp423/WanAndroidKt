@@ -1,7 +1,7 @@
 package com.xp.wanandroid.util
 
-import android.content.Context
 import android.widget.Toast
+import com.xp.wanandroid.base.BaseApplication
 
 /**
  * @类描述：Toast工具类
@@ -13,25 +13,25 @@ import android.widget.Toast
  */
 object ToastUtil {
     private var toast: Toast? = null
-    fun showLong(context: Context, resourceId: Int) {
-        show(context, context.resources.getString(resourceId), Toast.LENGTH_LONG)
+    fun showLong(resourceId: Int) {
+        show(BaseApplication.INSTANCE.resources.getString(resourceId), Toast.LENGTH_LONG)
     }
 
-    fun showShort(context: Context, resourceId: Int) {
-        show(context, context.resources.getString(resourceId), Toast.LENGTH_SHORT)
+    fun showShort(resourceId: Int) {
+        show(BaseApplication.INSTANCE.resources.getString(resourceId), Toast.LENGTH_SHORT)
     }
 
-    fun showLong(context: Context, text: String) {
-        show(context, text, Toast.LENGTH_LONG)
+    fun showLong(text: String) {
+        show(text, Toast.LENGTH_LONG)
     }
 
-    fun showShort(context: Context, text: String) {
-        show(context, text, Toast.LENGTH_SHORT)
+    fun showShort(text: String) {
+        show(text, Toast.LENGTH_SHORT)
     }
 
-    private fun show(context: Context, text: String, duration: Int) {
+    private fun show(text: String, duration: Int) {
         if (toast == null) {
-            toast = Toast.makeText(context, text, duration)
+            toast = Toast.makeText(BaseApplication.INSTANCE, text, duration)
         } else {
             toast?.setText(text)
         }

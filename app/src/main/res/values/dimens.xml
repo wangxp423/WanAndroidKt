@@ -8,4 +8,9 @@
     <dimen name="margin_top_normal">20dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="app_bar_padding_top">8dp</dimen>
+    <dimen name="padding_normal">5dp</dimen>
+
+
+    <dimen name="text_size_normal">18dp</dimen>
+    <dimen name="text_space_normal">3dp</dimen>
 </resources>

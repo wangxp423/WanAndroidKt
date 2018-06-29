@@ -28,6 +28,7 @@ import com.xp.wanandroid.util.ToastUtil
 class BlogTypeListAdapter(val context: Context, val datas: MutableList<Datas>) : BaseQuickAdapter<Datas, BaseViewHolder>(R.layout.main_recycle_item_collect), BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener {
     private val blogModel: BlogModel? by lazy { BlogModel() }
     private val isLogin: Boolean by Preference(Constant.KEY_LOGIN, false)
+    var isMyBlog = false
     override fun convert(helper: BaseViewHolder?, item: Datas?) {
         item ?: return
         helper?.setText(R.id.main_recycle_item_author, item?.author)
@@ -39,6 +40,7 @@ class BlogTypeListAdapter(val context: Context, val datas: MutableList<Datas>) :
     }
 
     override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
+        if (isMyBlog) return
         if (data.size > 0) {
             val item = data.get(position)
             when (view?.id) {
@@ -76,9 +78,9 @@ class BlogTypeListAdapter(val context: Context, val datas: MutableList<Datas>) :
             override fun onRequestSuccess(data: BlogEntity) {
                 if (data?.errorCode == 0) {
                     if (isAdd) {
-                        ToastUtil.showShort(context, context.getString(R.string.main_collect_success))
+                        ToastUtil.showShort(context.getString(R.string.main_collect_success))
                     } else {
-                        ToastUtil.showShort(context, context.getString(R.string.main_collect_cancel_success))
+                        ToastUtil.showShort(context.getString(R.string.main_collect_cancel_success))
                     }
                     val item = this@BlogTypeListAdapter.data.get(position)
                     item.collect = isAdd
@@ -89,7 +91,7 @@ class BlogTypeListAdapter(val context: Context, val datas: MutableList<Datas>) :
             }
 
             override fun onRequestFail(errorMsg: String?) {
-                errorMsg?.let { ToastUtil.showShort(context, errorMsg) }
+                errorMsg?.let { ToastUtil.showShort(errorMsg) }
             }
         })
     }

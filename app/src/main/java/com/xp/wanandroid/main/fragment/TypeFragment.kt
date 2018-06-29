@@ -89,7 +89,7 @@ class TypeFragment : BaseFragment(), MainTypeContract.MainTypeView {
     override fun getBlogTypeDataFail(errorMsg: String?) {
         hideLoading()
         errorMsg?.let {
-            ToastUtil.showShort(activity, errorMsg)
+            ToastUtil.showShort(errorMsg)
         }
     }
 

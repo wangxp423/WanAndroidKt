@@ -15,11 +15,11 @@ import com.xp.wanandroid.blog.fragment.BlogContentTypeFragment
  * @修改时间：2018/6/25 0025 17:38
  * @修改备注：
  */
-class BlogTypePagerAdapter(val list: List<BlogTypeEntity.Data.Children>, fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class BlogTypePagerAdapter(val list: List<BlogTypeEntity.Data.Children>, fm: FragmentManager, val isMyBlog: Boolean) : FragmentPagerAdapter(fm) {
     private val listFragment = mutableListOf<Fragment>()
 
     init {
-        list.forEach { listFragment.add(BlogContentTypeFragment.newInstance(it.id)) }
+        list.forEach { listFragment.add(BlogContentTypeFragment.newInstance(it.id, isMyBlog)) }
     }
 
     override fun getItem(position: Int): Fragment {

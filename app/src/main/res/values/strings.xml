@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">WanAndroid</string>
-    <string name="welcom_splash_content">欢迎光临个人博客!\nhttps://blog.csdn.net/wangxp423</string>
+    <string name="welcom_splash_content_csdn">欢迎光临个人博客!\nhttps://blog.csdn.net/wangxp423</string>
+    <string name="welcom_splash_content_github">欢迎光临个人gitHub!\nhttps://github.com/wangxp423</string>
     <string name="main_nav_header_unlogin">未登录</string>
     <string name="main_nav_header_logout">Logout</string>
     <string name="main_nav_header_please_login">请先登录</string>
     <string name="main_nav_menu_like">我喜欢的</string>
     <string name="main_nav_menu_about">关于我们</string>
+    <string name="main_nav_menu_csdn">我的博客</string>
     <string name="main_bottom_nav_menu_home">首页</string>
     <string name="main_bottom_nav_menu_type">分类</string>
     <string name="main_toolbar_menu_search">搜索</string>
@@ -68,4 +70,8 @@
     <string name="blog_share_article_url">%1$s分享【%2$s】：%3$s</string>
     <string name="blog_share_type_url">%1$s分享【%2$s】专题：http://www.wanandroid.com/article/list/0?cid=%3$d</string>
     <string name="blog_outside_title">归为站外文章</string>
+    <string name="blog_my_csdn">我的博客</string>
+    <string name="blog_my_csdn_link">https://blog.csdn.net/wangxp423</string>
+    <string name="blog_my_github">我的github</string>
+    <string name="blog_my_github_link">https://github.com/wangxp423</string>
 </resources>

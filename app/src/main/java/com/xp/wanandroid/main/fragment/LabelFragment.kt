@@ -102,7 +102,7 @@ class LabelFragment : BaseFragment(), MainHotLableContract.MainHotLableView {
     override fun getMyBookmarkDataFail(errorMsg: String?) {
         hideLoading()
         errorMsg?.let {
-            ToastUtil.showShort(activity, errorMsg)
+            ToastUtil.showShort(errorMsg)
         }
     }
 
@@ -120,7 +120,7 @@ class LabelFragment : BaseFragment(), MainHotLableContract.MainHotLableView {
     override fun getHotSearchDataFail(errorMsg: String?) {
         hideLoading()
         errorMsg?.let {
-            ToastUtil.showShort(activity, errorMsg)
+            ToastUtil.showShort(errorMsg)
         }
     }
 
@@ -138,7 +138,7 @@ class LabelFragment : BaseFragment(), MainHotLableContract.MainHotLableView {
     override fun getHotUseDataFail(errorMsg: String?) {
         hideLoading()
         errorMsg?.let {
-            ToastUtil.showShort(activity, errorMsg)
+            ToastUtil.showShort(errorMsg)
         }
     }
 

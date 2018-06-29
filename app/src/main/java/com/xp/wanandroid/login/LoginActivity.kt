@@ -75,7 +75,7 @@ class LoginActivity : BaseImmersionBarActivity(), View.OnClickListener, LoginCon
     }
 
     override fun registerSuccess(result: UserEntity) {
-        ToastUtil.showShort(this, getString(R.string.login_toast_register_success))
+        ToastUtil.showShort(getString(R.string.login_toast_register_success))
         loginRegisterSuccessAfter(result)
     }
 
@@ -84,7 +84,7 @@ class LoginActivity : BaseImmersionBarActivity(), View.OnClickListener, LoginCon
     }
 
     override fun loginSuccess(result: UserEntity) {
-        ToastUtil.showShort(this, getString(R.string.login_toast_login_success))
+        ToastUtil.showShort(getString(R.string.login_toast_login_success))
         loginRegisterSuccessAfter(result)
     }
 
@@ -112,7 +112,7 @@ class LoginActivity : BaseImmersionBarActivity(), View.OnClickListener, LoginCon
 
     fun loginRegisterFailAfter(msg: String?) {
         hideLoading()
-        msg?.let { ToastUtil.showShort(this, msg) }
+        msg?.let { ToastUtil.showShort(msg) }
         isLogin = false
 
     }

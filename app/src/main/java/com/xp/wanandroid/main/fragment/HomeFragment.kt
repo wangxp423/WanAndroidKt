@@ -160,7 +160,7 @@ class HomeFragment : BaseFragment(), MainHomeContract.IMainHomeView {
     override fun getDataListFail(errorMsg: String?) {
         hideLoading()
         errorMsg?.let {
-            ToastUtil.showShort(activity, it)
+            ToastUtil.showShort(it)
         }
     }
 
@@ -183,7 +183,7 @@ class HomeFragment : BaseFragment(), MainHomeContract.IMainHomeView {
     override fun loadMoreDataListFail(errorMsg: String?) {
         blogAdapter.loadMoreFail()
         errorMsg?.let {
-            ToastUtil.showShort(activity, it)
+            ToastUtil.showShort(it)
         }
     }
 
@@ -194,7 +194,7 @@ class HomeFragment : BaseFragment(), MainHomeContract.IMainHomeView {
     }
 
     override fun getBannerDataListFail(errorMsg: String?) {
-        errorMsg?.let { ToastUtil.showShort(activity, errorMsg) }
+        errorMsg?.let { ToastUtil.showShort(errorMsg) }
     }
 
     override fun articleDataSuccess(result: BlogEntity?) {

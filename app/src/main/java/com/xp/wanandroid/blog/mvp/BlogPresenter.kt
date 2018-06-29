@@ -1,7 +1,9 @@
 package com.xp.wanandroid.blog.mvp
 
 import com.xp.wanandroid.blog.entity.BlogEntity
+import com.xp.wanandroid.blog.util.MyBlogUtil
 import com.xp.wanandroid.listener.RequestBackListener
+import com.xp.wanandroid.util.Constant
 import com.xp.wanandroid.util.LogUtil
 
 /**
@@ -70,7 +72,6 @@ class BlogPresenter(val blogView: BlogContract.BlogView) : BlogContract.IBlogPre
 
         })
     }
-
 
 
     override fun loadMoreDataList(page: Int) {
@@ -200,6 +201,12 @@ class BlogPresenter(val blogView: BlogContract.BlogView) : BlogContract.IBlogPre
             }
 
         })
+    }
+
+    fun getMyBlogData(id: Int) {
+        val entity: BlogEntity? = MyBlogUtil.getMyBlogType(id)
+        entity ?: let { blogView.getDataListFail(Constant.REQUEST_NULL) }
+        blogView.getDataListSuccess(entity)
     }
 
     override fun cancleRequest() {

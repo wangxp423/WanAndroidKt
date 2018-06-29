@@ -109,7 +109,7 @@ class BlogSearchActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
 
     override fun getDataListFail(errorMsg: String?) {
         hideLoading()
-        errorMsg?.let { ToastUtil.showShort(this, it) }
+        errorMsg?.let { ToastUtil.showShort(it) }
     }
 
     override fun loadMoreDataListSuccess(result: BlogEntity?) {
@@ -130,7 +130,7 @@ class BlogSearchActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
 
     override fun loadMoreDataListFail(errorMsg: String?) {
         blogAdapter.loadMoreFail()
-        errorMsg?.let { ToastUtil.showShort(this, it) }
+        errorMsg?.let { ToastUtil.showShort(it) }
     }
 
     override fun showLoading() {
@@ -204,7 +204,7 @@ class BlogSearchActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
                 blogPresenter.getDataListByKey(pageIndex, it)
             } ?: let {
                 blog_include_srl.isRefreshing = false
-                ToastUtil.showShort(this@BlogSearchActivity, R.string.main_collect_list_no_data)
+                ToastUtil.showShort(R.string.main_collect_list_no_data)
             }
             searchView?.clearFocus()
             return false
