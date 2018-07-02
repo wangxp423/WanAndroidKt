@@ -39,7 +39,7 @@ WanAndroid网站,手机APP，Kotlin版。
 ![iamge](https://github.com/wangxp423/WanAndroidKt/raw/master/screenshot/main_type.png)
 ![iamge](https://github.com/wangxp423/WanAndroidKt/raw/master/screenshot/type_list.png)
 ### 登录
-![iamge](https://github.com/wangxp423/WanAndroidKt/raw/master/screenshot/main_type.png)
+![iamge](https://github.com/wangxp423/WanAndroidKt/raw/master/screenshot/login_register.png)
 ### 我的
 ![iamge](https://github.com/wangxp423/WanAndroidKt/raw/master/screenshot/my_blog.png)
 ### 文章
