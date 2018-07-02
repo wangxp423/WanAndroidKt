@@ -2,7 +2,7 @@
 WanAndroid网站,手机APP，Kotlin版。
 感谢<玩Android网站>http://www.wanandroid.com/提供的api接口
 ## 二维码下载
-![iamge](https://github.com/wangxp423/WanAndroidKt/raw/master/screenshot/qrcode.png)
+![iamge](https://github.com/wangxp423/WanAndroidKt/raw/master/screenshot/qrcode.jpg)
 
 ## 接口
 [玩Android接口](http://www.wanandroid.com/blog/show/2)
