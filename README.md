@@ -1,6 +1,10 @@
 # WanAndroidKt
 WanAndroid网站,手机APP，Kotlin版。
 感谢<玩Android网站>http://www.wanandroid.com/提供的api接口
+
+## 个人博客
+欢迎光临个人博客：<https://blog.csdn.net/wangxp423>
+
 ## 二维码下载
 ![iamge](https://github.com/wangxp423/WanAndroidKt/raw/master/screenshot/qrcode.jpg)
 
@@ -33,7 +37,7 @@ WanAndroid网站,手机APP，Kotlin版。
 
 ### 首页
 ![iamge](https://github.com/wangxp423/WanAndroidKt/raw/master/screenshot/main_banner.png)
-![iamge](https://github.com/wangxp423/WanAndroidKt/raw/master/screenshot/main_hotlabel.png)
+![iamge](https://github.com/wangxp423/WanAndroidKt/raw/master/screenshot/main_hot_label.png)
 ![iamge](https://github.com/wangxp423/WanAndroidKt/raw/master/screenshot/main_search.png)
 ### 分类
 ![iamge](https://github.com/wangxp423/WanAndroidKt/raw/master/screenshot/main_type.png)
@@ -42,5 +46,6 @@ WanAndroid网站,手机APP，Kotlin版。
 ![iamge](https://github.com/wangxp423/WanAndroidKt/raw/master/screenshot/login_register.png)
 ### 我的
 ![iamge](https://github.com/wangxp423/WanAndroidKt/raw/master/screenshot/my_blog.png)
+![iamge](https://github.com/wangxp423/WanAndroidKt/raw/master/screenshot/my_csdn.png)
 ### 文章
 ![iamge](https://github.com/wangxp423/WanAndroidKt/raw/master/screenshot/blog_detail.png)
