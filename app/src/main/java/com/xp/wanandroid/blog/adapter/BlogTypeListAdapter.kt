@@ -14,6 +14,7 @@ import com.xp.wanandroid.listener.RequestBackListener
 import com.xp.wanandroid.login.LoginActivity
 import com.xp.wanandroid.util.Constant
 import com.xp.wanandroid.util.Preference
+import com.xp.wanandroid.util.TCAgentUtil
 import com.xp.wanandroid.util.ToastUtil
 
 
@@ -59,6 +60,9 @@ class BlogTypeListAdapter(val context: Context, val datas: MutableList<Datas>) :
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
         if (data.size > 0) {
             val item = getItem(position)
+            if (isMyBlog) {
+                TCAgentUtil.onEvent(context, item?.chapterName, item?.link)
+            }
             Intent(context, BlogActivity::class.java).run {
                 putExtra(Constant.BLOG_EXTRA_URL, item?.link)
                 putExtra(Constant.BLOG_EXTRA_TITLE, item?.title)

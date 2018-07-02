@@ -23,7 +23,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -47,6 +47,7 @@ dependencies {
     implementation "com.gyf.barlibrary:barlibrary:$barlibrary_version"
     implementation "com.hyman:flowlayout-lib:$flowlayout_version"
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:$retrofit2_converter_kotlin_coroutines_version"
+    implementation files('libs/SaaS_AppAnalytics_Android_SDK_V4.0.19.jar')
 }
 
 kotlin {

@@ -27,8 +27,8 @@ task clean(type: Delete) {
 }
 
 ext {
-    retrofit2_version = "2.1.0"
-    retrofit2_converter_gson_version = "2.1.0"
+    retrofit2_version = "2.4.0"
+    retrofit2_converter_gson_version = "2.4.0"
     retrofit2_converter_kotlin_coroutines_version = "1.0.0"
     okhttp3_logging_version = "3.6.0"
     support_version = "26.1.0"

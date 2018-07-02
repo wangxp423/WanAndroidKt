@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.ComponentCallbacks2
 import com.bumptech.glide.Glide
 import com.squareup.leakcanary.LeakCanary
+import com.tendcloud.tenddata.TCAgent
 import com.xp.wanandroid.BuildConfig
 
 /**
@@ -26,6 +27,7 @@ class BaseApplication : Application() {
             LeakCanary.install(this)
         }
         INSTANCE = this
+        initTalkingData()
     }
 
     override fun onTrimMemory(level: Int) {
@@ -39,5 +41,11 @@ class BaseApplication : Application() {
     override fun onLowMemory() {
         super.onLowMemory()
         Glide.get(this).clearMemory()
+    }
+
+    fun initTalkingData() {
+        TCAgent.LOG_ON = false
+        TCAgent.init(this, "AF9745BFB9FB471B9A117A25E5C29104", "CHANNEL_TD")
+        TCAgent.setReportUncaughtExceptions(true)
     }
 }

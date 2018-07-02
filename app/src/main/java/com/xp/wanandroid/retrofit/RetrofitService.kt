@@ -87,8 +87,8 @@ interface RetrofitService {
      * @param password password
      * @return Deferred<LoginResponse>
      */
-    @POST("/user/login")
     @FormUrlEncoded
+    @POST("/user/login")
     fun loginWanAndroid(
             @Field("username") username: String,
             @Field("password") password: String
