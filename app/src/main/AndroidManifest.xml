@@ -79,6 +79,8 @@
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+
+        <receiver android:name=".receiver.NetworkChangeReceiver" />
     </application>
 
 </manifest>

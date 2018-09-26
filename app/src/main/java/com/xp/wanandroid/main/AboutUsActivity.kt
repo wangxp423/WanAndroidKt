@@ -4,7 +4,7 @@ import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.view.MenuItem
 import com.xp.wanandroid.R
-import com.xp.wanandroid.base.BaseImmersionBarActivity
+import com.xp.wanandroid.base.BaseToolBarActivity
 import kotlinx.android.synthetic.main.main_activity_about.*
 
 /**
@@ -15,13 +15,9 @@ import kotlinx.android.synthetic.main.main_activity_about.*
  * @修改时间：2018/6/20 0020 10:03
  * @修改备注：
  */
-class AboutUsActivity : BaseImmersionBarActivity() {
+class AboutUsActivity : BaseToolBarActivity() {
     override fun setLayoutId(): Int = R.layout.main_activity_about
 
-    override fun initImmersionBar() {
-        super.initImmersionBar()
-        immersionBar.titleBar(R.id.main_activity_about_tb).init()
-    }
 
     override fun initView() {
         main_activity_about_tb.run {
@@ -39,8 +35,6 @@ class AboutUsActivity : BaseImmersionBarActivity() {
     override fun initData() {
     }
 
-    override fun cancelRequest() {
-    }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == android.R.id.home) {

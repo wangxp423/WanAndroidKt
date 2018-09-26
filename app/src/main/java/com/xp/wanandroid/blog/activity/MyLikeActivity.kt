@@ -3,7 +3,7 @@ package com.xp.wanandroid.blog.activity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import com.xp.wanandroid.R
-import com.xp.wanandroid.base.BaseImmersionBarActivity
+import com.xp.wanandroid.base.BaseToolBarActivity
 import com.xp.wanandroid.blog.adapter.BlogListAdapter
 import com.xp.wanandroid.blog.entity.BlogEntity
 import com.xp.wanandroid.blog.entity.Datas
@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.blog_include_swipe_recycle.*
  * @修改时间：2018/6/20 0020 11:16
  * @修改备注：
  */
-class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
+class MyLikeActivity : BaseToolBarActivity(), BlogContract.BlogView {
     private val datas = mutableListOf<Datas>()
     private val blogPresenter: BlogContract.IBlogPresenter by lazy { BlogPresenter(this) }
     private val blogAdapter: BlogListAdapter by lazy { BlogListAdapter(this, datas) }
@@ -29,10 +29,6 @@ class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
 
     override fun setLayoutId(): Int = R.layout.blog_activity_like
 
-    override fun initImmersionBar() {
-        super.initImmersionBar()
-        immersionBar.titleBar(R.id.main_collect_toolbar).init()
-    }
 
     override fun initView() {
         main_collect_toolbar.run {
@@ -68,9 +64,6 @@ class MyLikeActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
     override fun initData() {
         showLoading()
         blogPresenter.getDataList(pageIndex)
-    }
-
-    override fun cancelRequest() {
     }
 
     override fun getDataListSuccess(result: BlogEntity?) {

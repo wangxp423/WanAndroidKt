@@ -50,7 +50,6 @@ interface RetrofitService {
 
     /**
      * 我的常用网址
-     * @return FriendListResponse
      */
     @GET("/lg/collect/usertools/json")
     fun getMyBookmarkList(): Deferred<HotLableEntity>
@@ -85,7 +84,6 @@ interface RetrofitService {
      * 登录
      * @param username username
      * @param password password
-     * @return Deferred<LoginResponse>
      */
     @FormUrlEncoded
     @POST("/user/login")
@@ -99,7 +97,6 @@ interface RetrofitService {
      * @param username username
      * @param password password
      * @param repassword repassword
-     * @return Deferred<LoginResponse>
      */
     @POST("/user/register")
     @FormUrlEncoded
@@ -112,7 +109,6 @@ interface RetrofitService {
     /**
      * 获取自己收藏的文章列表
      * @param page page
-     * @return Deferred<HomeListResponse>
      */
     @GET("/lg/collect/list/{page}/json")
     fun getLikeList(
@@ -122,7 +118,6 @@ interface RetrofitService {
     /**
      * 收藏文章
      * @param id id
-     * @return Deferred<HomeListResponse>
      */
     @POST("/lg/collect/{id}/json")
     fun addCollectArticle(
@@ -134,7 +129,6 @@ interface RetrofitService {
      * @param title title
      * @param author author
      * @param link link
-     * @return Deferred<HomeListResponse>
      */
     @POST("/lg/collect/add/json")
     @FormUrlEncoded
@@ -148,7 +142,6 @@ interface RetrofitService {
      * 删除收藏文章
      * @param id id
      * @param originId -1
-     * @return Deferred<HomeListResponse>
      */
     @POST("/lg/uncollect/{id}/json")
     @FormUrlEncoded

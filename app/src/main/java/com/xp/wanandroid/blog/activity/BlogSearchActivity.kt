@@ -5,7 +5,7 @@ import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
 import com.xp.wanandroid.R
-import com.xp.wanandroid.base.BaseImmersionBarActivity
+import com.xp.wanandroid.base.BaseToolBarActivity
 import com.xp.wanandroid.blog.adapter.BlogListAdapter
 import com.xp.wanandroid.blog.entity.BlogEntity
 import com.xp.wanandroid.blog.entity.Datas
@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.blog_include_swipe_recycle.*
  * @修改时间：2018/6/22 0022 15:44
  * @修改备注：
  */
-class BlogSearchActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
+class BlogSearchActivity : BaseToolBarActivity(), BlogContract.BlogView {
     private val datas = mutableListOf<Datas>()
     private val blogPresenter: BlogContract.IBlogPresenter by lazy { BlogPresenter(this) }
     private val blogAdapter: BlogListAdapter by lazy { BlogListAdapter(this, datas) }
@@ -33,11 +33,6 @@ class BlogSearchActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
     private var searchView: SearchView? = null
 
     override fun setLayoutId(): Int = R.layout.blog_activity_like
-
-    override fun initImmersionBar() {
-        super.initImmersionBar()
-        immersionBar.titleBar(R.id.main_collect_toolbar).init()
-    }
 
     override fun initView() {
         main_collect_toolbar.run {
@@ -77,10 +72,6 @@ class BlogSearchActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
         intent.extras?.let {
             searchKey = it.getString(Constant.BLOG_EXTRA_SEARCH_KEY, null)
         }
-    }
-
-    override fun cancelRequest() {
-        blogPresenter.cancleRequest()
     }
 
     override fun getDataListSuccess(result: BlogEntity?) {

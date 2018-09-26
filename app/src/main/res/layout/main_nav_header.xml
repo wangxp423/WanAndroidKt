@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/main_nav_header_height"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@color/colorPrimary"
@@ -15,7 +14,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_weight="1"
         android:paddingTop="@dimen/dp_10"
-        app:srcCompat="@drawable/logo"
+        android:src="@drawable/logo"
         tools:ignore="ContentDescription" />
 
     <TextView

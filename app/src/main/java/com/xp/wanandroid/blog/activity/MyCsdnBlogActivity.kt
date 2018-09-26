@@ -2,9 +2,10 @@ package com.xp.wanandroid.blog.activity
 
 import android.content.Intent
 import android.view.MenuItem
+import android.widget.ImageView
 import com.google.gson.Gson
 import com.xp.wanandroid.R
-import com.xp.wanandroid.base.BaseImmersionBarActivity
+import com.xp.wanandroid.base.BaseToolBarActivity
 import com.xp.wanandroid.blog.entity.BlogTypeEntity
 import com.xp.wanandroid.blog.util.MyBlogUtil
 import com.xp.wanandroid.util.Constant
@@ -18,15 +19,11 @@ import kotlinx.android.synthetic.main.blog_activity_my_csdn.*
  * @修改时间：2018/6/29 0029 10:29
  * @修改备注：
  */
-class MyCsdnBlogActivity : BaseImmersionBarActivity() {
+class MyCsdnBlogActivity : BaseToolBarActivity() {
     private var myBlogData: BlogTypeEntity? = null
     override fun setLayoutId(): Int = R.layout.blog_activity_my_csdn
 
-    override fun initImmersionBar() {
-        super.initImmersionBar()
-        immersionBar.titleBar(R.id.blog_csdn_toolbar).init()
-    }
-
+    private val images = mutableListOf<ImageView>()
     override fun initView() {
         blog_csdn_toolbar.run {
             title = getString(R.string.main_nav_menu_csdn)
@@ -48,10 +45,13 @@ class MyCsdnBlogActivity : BaseImmersionBarActivity() {
         }
         tv_blog_csdn_csdn.run {
             setOnClickListener {
-                Intent(context, BlogActivity::class.java).run {
-                    putExtra(Constant.BLOG_EXTRA_URL, getString(R.string.blog_my_csdn_link))
-                    putExtra(Constant.BLOG_EXTRA_TITLE, getString(R.string.blog_my_csdn))
-                    context.startActivity(this)
+                //                Intent(context, BlogActivity::class.java).run {
+//                    putExtra(Constant.BLOG_EXTRA_URL, getString(R.string.blog_my_csdn_link))
+//                    putExtra(Constant.BLOG_EXTRA_TITLE, getString(R.string.blog_my_csdn))
+//                    context.startActivity(this)
+//                }
+                for (i in 1..10000) {
+                    images.add(ImageView(this@MyCsdnBlogActivity))
                 }
             }
         }
@@ -81,9 +81,6 @@ class MyCsdnBlogActivity : BaseImmersionBarActivity() {
                 tv_blog_csdn_content.text = stringBuilder.toString()
             }
         }
-    }
-
-    override fun cancelRequest() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

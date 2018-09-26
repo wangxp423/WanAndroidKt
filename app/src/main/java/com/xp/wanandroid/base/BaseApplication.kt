@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.ComponentCallbacks2
 import com.bumptech.glide.Glide
 import com.squareup.leakcanary.LeakCanary
+import com.squareup.leakcanary.RefWatcher
 import com.tendcloud.tenddata.TCAgent
 import com.xp.wanandroid.BuildConfig
 
@@ -21,10 +22,11 @@ class BaseApplication : Application() {
             private set
     }
 
+    lateinit var refWatcher: RefWatcher
     override fun onCreate() {
         super.onCreate()
         if (BuildConfig.DEBUG) {
-            LeakCanary.install(this)
+            refWatcher = LeakCanary.install(this)
         }
         INSTANCE = this
         initTalkingData()

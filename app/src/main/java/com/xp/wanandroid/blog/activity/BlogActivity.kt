@@ -9,7 +9,7 @@ import android.widget.LinearLayout
 import com.just.agentweb.AgentWeb
 import com.just.agentweb.ChromeClientCallbackManager
 import com.xp.wanandroid.R
-import com.xp.wanandroid.base.BaseImmersionBarActivity
+import com.xp.wanandroid.base.BaseToolBarActivity
 import com.xp.wanandroid.blog.entity.BlogEntity
 import com.xp.wanandroid.blog.mvp.BlogContract
 import com.xp.wanandroid.blog.mvp.BlogPresenter
@@ -26,18 +26,13 @@ import kotlinx.android.synthetic.main.blog_activity_blog.*
  * @修改时间：2018/6/22 0022 11:04
  * @修改备注：
  */
-class BlogActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
+class BlogActivity : BaseToolBarActivity(), BlogContract.BlogView {
     private val blogPresenter: BlogContract.IBlogPresenter by lazy { BlogPresenter(this) }
     private lateinit var agentWeb: AgentWeb
     private lateinit var shareTitle: String
     private lateinit var shareUrl: String
     private var isCollect: Boolean = false
     private var shareId: Int = 0
-
-    override fun initImmersionBar() {
-        super.initImmersionBar()
-        immersionBar.titleBar(R.id.blog_activity_blog_toolbar).init()
-    }
 
     override fun setLayoutId(): Int = R.layout.blog_activity_blog
 
@@ -106,10 +101,6 @@ class BlogActivity : BaseImmersionBarActivity(), BlogContract.BlogView {
 
     override fun unArticleDataFail(errorMsg: String?) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun cancelRequest() {
-        blogPresenter.cancleRequest()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

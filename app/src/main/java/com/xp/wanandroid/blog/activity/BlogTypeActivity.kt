@@ -5,7 +5,7 @@ import android.support.design.widget.TabLayout
 import android.view.Menu
 import android.view.MenuItem
 import com.xp.wanandroid.R
-import com.xp.wanandroid.base.BaseImmersionBarActivity
+import com.xp.wanandroid.base.BaseToolBarActivity
 import com.xp.wanandroid.blog.adapter.BlogTypePagerAdapter
 import com.xp.wanandroid.blog.entity.BlogTypeEntity
 import com.xp.wanandroid.util.Constant
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.blog_activity_blog_type.*
  * @修改时间：2018/6/22 0022 11:27
  * @修改备注：
  */
-class BlogTypeActivity : BaseImmersionBarActivity() {
+class BlogTypeActivity : BaseToolBarActivity() {
     private var isMyBlog: Boolean = false
     private lateinit var firstTitle: String
     private val list = mutableListOf<BlogTypeEntity.Data.Children>()
@@ -29,10 +29,6 @@ class BlogTypeActivity : BaseImmersionBarActivity() {
 
     override fun setLayoutId(): Int = R.layout.blog_activity_blog_type
 
-    override fun initImmersionBar() {
-        super.initImmersionBar()
-        immersionBar.titleBar(R.id.blog_activity_blog_type_toolbar).init()
-    }
 
     override fun initView() {
         blog_activity_blog_type_toolbar.run {
@@ -76,8 +72,6 @@ class BlogTypeActivity : BaseImmersionBarActivity() {
     override fun initData() {
     }
 
-    override fun cancelRequest() {
-    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.blog_content_type_menu, menu)

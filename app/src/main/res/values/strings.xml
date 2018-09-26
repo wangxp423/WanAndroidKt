@@ -74,4 +74,6 @@
     <string name="blog_my_csdn_link">https://blog.csdn.net/wangxp423</string>
     <string name="blog_my_github">我的github</string>
     <string name="blog_my_github_link">https://github.com/wangxp423</string>
+
+    <string name="network_unavailable_tip">网络连接不可用,请检查网络设置!</string>
 </resources>

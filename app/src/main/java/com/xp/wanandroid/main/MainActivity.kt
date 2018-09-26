@@ -11,7 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import com.xp.wanandroid.R
-import com.xp.wanandroid.base.BaseImmersionBarActivity
+import com.xp.wanandroid.base.BaseToolBarActivity
 import com.xp.wanandroid.blog.activity.BlogSearchActivity
 import com.xp.wanandroid.blog.activity.MyCsdnBlogActivity
 import com.xp.wanandroid.blog.activity.MyLikeActivity
@@ -32,7 +32,7 @@ import kotlinx.android.synthetic.main.main_activity_main.*
  * @修改时间：2018/6/11 0011 16:50
  * @修改备注：
  */
-class MainActivity : BaseImmersionBarActivity() {
+class MainActivity : BaseToolBarActivity() {
     val MAIN_LOGIN_REQUEST_CODE = 100
     val MAIN_LIKE_REQUEST_CODE = 101
     private var lastTime: Long = 0
@@ -49,10 +49,6 @@ class MainActivity : BaseImmersionBarActivity() {
 
     override fun setLayoutId(): Int = R.layout.main_activity_main
 
-    override fun initImmersionBar() {
-        super.initImmersionBar()
-        immersionBar.titleBar(R.id.main_activity_main_toolbar).init()
-    }
 
     override fun initView() {
         main_activity_main_toolbar.run {
@@ -167,9 +163,6 @@ class MainActivity : BaseImmersionBarActivity() {
             ToastUtil.showLong(R.string.main_double_click_exit)
             lastTime = System.currentTimeMillis()
         }
-    }
-
-    override fun cancelRequest() {
     }
 
     private fun bottomNavItemSelected(id: Int): Boolean {

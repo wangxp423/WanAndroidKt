@@ -4,9 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.text.TextUtils
 import android.view.View
-import com.gyf.barlibrary.ImmersionBar
 import com.xp.wanandroid.R
-import com.xp.wanandroid.base.BaseImmersionBarActivity
+import com.xp.wanandroid.base.BaseToolBarActivity
 import com.xp.wanandroid.login.entity.UserEntity
 import com.xp.wanandroid.login.mvp.LoginContract
 import com.xp.wanandroid.login.mvp.LoginPresenter
@@ -23,7 +22,7 @@ import kotlinx.android.synthetic.main.login_activity_login.*
  * @修改时间：2018/6/13 0013 11:07
  * @修改备注：
  */
-class LoginActivity : BaseImmersionBarActivity(), View.OnClickListener, LoginContract.LoginView {
+class LoginActivity : BaseToolBarActivity(), View.OnClickListener, LoginContract.LoginView {
     private var isLogin: Boolean by Preference(Constant.KEY_LOGIN, false)
     private var username: String by Preference(Constant.KEY_USERNAME, "")
     private var password: String by Preference(Constant.KEY_PASSWORD, "")
@@ -33,12 +32,6 @@ class LoginActivity : BaseImmersionBarActivity(), View.OnClickListener, LoginCon
 
     override fun setLayoutId(): Int = R.layout.login_activity_login
 
-    override fun initImmersionBar() {
-        super.initImmersionBar()
-        if (ImmersionBar.isSupportStatusBarDarkFont()) {
-            immersionBar.statusBarDarkFont(true).init()
-        }
-    }
 
     override fun initView() {
         login_activity_login_registe.setOnClickListener(this)
@@ -49,10 +42,6 @@ class LoginActivity : BaseImmersionBarActivity(), View.OnClickListener, LoginCon
     override fun initData() {
     }
 
-    override fun cancelRequest() {
-        loginPresenter.cancelRegister()
-        loginPresenter.cancelLogin()
-    }
 
     override fun onClick(v: View?) {
         when (v?.id) {
